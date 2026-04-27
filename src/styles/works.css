@@ -1,0 +1,203 @@
+/* Works Page Styles */
+
+.works-header {
+  padding: 4rem 0;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
+}
+
+.works-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #0066ff, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app.dark .works-header p {
+  color: var(--dark-text-muted);
+}
+
+.app.light .works-header p {
+  color: var(--light-text-muted);
+}
+
+/* Projects Section */
+.projects {
+  padding: 5rem 0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 102, 255, 0.2);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.app.dark .project-card {
+  background-color: rgba(26, 31, 58, 0.5);
+}
+
+.app.light .project-card {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.project-card:hover {
+  border-color: var(--primary-blue);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+}
+
+.project-image {
+  height: 200px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 102, 255, 0.2);
+}
+
+.project-emoji {
+  font-size: 5rem;
+}
+
+.project-content {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--primary-blue);
+}
+
+.project-description {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.app.dark .project-description {
+  color: var(--dark-text-muted);
+}
+
+.app.light .project-description {
+  color: var(--light-text-muted);
+}
+
+.project-features,
+.project-tech {
+  margin-bottom: 1.5rem;
+}
+
+.project-features h3,
+.project-tech h3 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary-blue);
+}
+
+.project-features ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-features li {
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.project-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+.app.dark .project-features li {
+  color: var(--dark-text-muted);
+}
+
+.app.light .project-features li {
+  color: var(--light-text-muted);
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: rgba(0, 102, 255, 0.1);
+  border: 1px solid rgba(0, 102, 255, 0.3);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--primary-blue);
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.project-links .btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* Coming Soon Section */
+.coming-soon {
+  padding: 4rem 0;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
+  border-radius: 12px;
+  margin-top: 3rem;
+}
+
+.coming-soon h2 {
+  margin-bottom: 1rem;
+}
+
+.app.dark .coming-soon p {
+  color: var(--dark-text-muted);
+}
+
+.app.light .coming-soon p {
+  color: var(--light-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .works-header h1 {
+    font-size: 2rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-links {
+    flex-direction: column;
+  }
+
+  .project-links .btn {
+    width: 100%;
+  }
+}
