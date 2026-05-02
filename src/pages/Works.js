@@ -21,6 +21,26 @@ const projects = [
     link: 'https://kennis-ph.netlify.app',
     github: 'https://github.com/cyperpro20/kennis-power-house',
   },
+  {
+    id: 2,
+    index: '02',
+    title: 'NumShift',
+    year: '2026',
+    category: 'SaaS · React',
+    description:
+      'A WhatsApp account recovery tool that notifies all your contacts of your new number — with a personalised message and a voice note to prove it\'s really you. No spam flags. No scam vibes.',
+    technologies: ['React', 'React Router', 'Netlify', 'Cloud SMS', 'CSS3'],
+    features: [
+      'Secure contact sync from phonebook',
+      'Voice note recording & cloud hosting',
+      'Personalised bulk SMS blast',
+      'Local SIM & Cloud SMS options',
+      'Spam-filter-safe message delivery',
+      'Trusted by users across 30+ countries',
+    ],
+    link: 'https://numshift.netlify.app',
+    github: 'https://github.com/cyperpro20/NumShift',
+  },
 ];
 
 const Works = ({ isDarkMode }) => {

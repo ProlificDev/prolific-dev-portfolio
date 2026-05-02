@@ -17,35 +17,47 @@ const stats = [
 const roles = ['Frontend Dev', 'React Engineer', 'UI Craftsman', 'Web Builder'];
 
 const WordCycler = ({ isDarkMode }) => {
-  const [index, setIndex]     = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayed, setDisplayed] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % roles.length);
-        setVisible(true);
-      }, 350);
-    }, 2600);
-    return () => clearInterval(interval);
-  }, []);
+    const current = roles[roleIndex];
+    let timeout;
+
+    if (!isDeleting && displayed.length < current.length) {
+      // Typing
+      timeout = setTimeout(() => {
+        setDisplayed(current.slice(0, displayed.length + 1));
+      }, 80);
+    } else if (!isDeleting && displayed.length === current.length) {
+      // Pause at full word
+      timeout = setTimeout(() => setIsDeleting(true), 1800);
+    } else if (isDeleting && displayed.length > 0) {
+      // Deleting
+      timeout = setTimeout(() => {
+        setDisplayed(current.slice(0, displayed.length - 1));
+      }, 45);
+    } else if (isDeleting && displayed.length === 0) {
+      // Move to next role
+      setIsDeleting(false);
+      setRoleIndex((i) => (i + 1) % roles.length);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayed, isDeleting, roleIndex]);
 
   return (
-    <span
-      className={`
-        inline-flex items-center gap-1.5
-        px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold tracking-widest uppercase
-        border transition-all duration-300
-        ${isDarkMode
-          ? 'border-blue-500/40 bg-blue-500/10 text-blue-400'
-          : 'border-blue-500/30 bg-blue-50 text-blue-600'}
-        ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}
-      `}
-      style={{ transition: 'opacity 0.35s ease, transform 0.35s ease' }}
-    >
-      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-blink shrink-0" />
-      {roles[index]}
+    <span className={`inline-flex items-center font-black text-4xl sm:text-5xl md:text-7xl leading-tight tracking-tight text-blue-500`}>
+      {displayed}
+      <span
+        className="ml-[2px] inline-block w-[3px] rounded-sm bg-blue-500"
+        style={{
+          height: '0.85em',
+          animation: 'cursorBlink 1s step-end infinite',
+          verticalAlign: 'middle',
+        }}
+      />
     </span>
   );
 };
@@ -61,7 +73,17 @@ const Home = ({ isDarkMode }) => {
     <div className={`${bg} transition-colors duration-300`}>
 
       {/* ══ HERO ══ */}
-      <section className="min-h-screen flex flex-col items-center justify-center text-center px-5 pt-20 pb-12 max-w-3xl mx-auto">
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-5 pt-20 pb-12 overflow-hidden">
+
+        {/* Animated background orbs */}
+        <div className="hero-bg">
+          <div className="orb orb-1" />
+          <div className="orb orb-2" />
+          <div className="orb orb-3" />
+        </div>
+
+        {/* Content wrapper — keeps max-width constraint */}
+        <div className="relative z-10 max-w-3xl mx-auto w-full flex flex-col items-center">
 
         {/* Status badge */}
         <div className="mb-6 animate-slide-up-fade-1">
@@ -82,18 +104,13 @@ const Home = ({ isDarkMode }) => {
         </div>
 
         {/* Big name + word cycler */}
-        <div className="animate-slide-up-fade-3 w-full">
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-1">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-tight tracking-tight">
-              Emmanuel
-            </h1>
-            <div className="flex items-center">
-              <WordCycler isDarkMode={isDarkMode} />
-            </div>
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-tight tracking-tight text-blue-500">
-            Awuzie
+        <div className="animate-slide-up-fade-3 w-full text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-tight tracking-tight mb-2">
+            Emmanuel Awuzie
           </h1>
+          <div className="flex items-center justify-center min-h-[1.2em]">
+            <WordCycler isDarkMode={isDarkMode} />
+          </div>
         </div>
 
         {/* Sub-line */}
@@ -131,6 +148,7 @@ const Home = ({ isDarkMode }) => {
           <span className="text-[10px] font-mono tracking-widest uppercase">Scroll to explore</span>
           <div className={`w-8 h-px ${isDarkMode ? 'bg-white/20' : 'bg-black/20'}`} />
         </div>
+        </div>{/* end content wrapper */}
       </section>
 
       {/* ══ STATS ══ */}

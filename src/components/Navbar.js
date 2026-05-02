@@ -37,7 +37,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
           {/* Animated SVG lettermark */}
-          <div className="relative w-8 h-8 shrink-0">
+          <div className="relative w-8 h-8 shrink-0 overflow-hidden logo-shimmer">
             {/* Outer rotating ring — spins on hover */}
             <svg
               className="absolute inset-0 w-8 h-8 transition-transform duration-700 group-hover:rotate-180"

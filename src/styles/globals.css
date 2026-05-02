@@ -18,6 +18,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typewriter cursor blink */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 /* Logo pulse glow animation */
 @keyframes logoPulse {
   0%, 100% {
@@ -28,6 +34,45 @@ body {
     filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.9));
     transform: scale(1.06);
   }
+}
+
+/* Logo shimmer sweep — diagonal light sweep on hover */
+@keyframes logoShimmer {
+  0% {
+    transform: translateX(-120%) rotate(25deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(220%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.logo-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%) rotate(25deg);
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.logo-shimmer:hover::after {
+  animation: logoShimmer 0.7s ease forwards;
 }
 
 /* ── Navbar link styles ── */
