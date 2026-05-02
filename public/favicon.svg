@@ -1,17 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Background rounded square -->
-  <rect width="64" height="64" rx="14" fill="#0a0a0a"/>
-  <!-- Blue accent bar -->
-  <rect x="10" y="52" width="44" height="4" rx="2" fill="#0066ff"/>
-  <!-- Letter P -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dashed outer ring -->
+  <circle
+    cx="16" cy="16" r="14"
+    stroke="#0066ff"
+    stroke-width="1.5"
+    stroke-dasharray="6 4"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.5"
+  />
+  <!-- Solid blue inner circle -->
+  <circle cx="16" cy="16" r="11" fill="#0066ff"/>
+  <!-- P lettermark -->
   <text
-    x="32"
-    y="46"
-    font-family="Inter, Arial Black, sans-serif"
-    font-size="40"
-    font-weight="900"
-    fill="white"
+    x="16" y="21"
     text-anchor="middle"
-    dominant-baseline="auto"
+    fill="white"
+    font-size="13"
+    font-weight="900"
+    font-family="Inter, Arial Black, sans-serif"
   >P</text>
 </svg>

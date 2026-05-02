@@ -20,21 +20,22 @@ const Footer = ({ isDarkMode }) => {
         </div>
 
         {/* Nav links + social icons */}
-        <nav className="flex flex-wrap items-center justify-center gap-5">
-          {[['/', 'Home'], ['/works', 'Works'], ['/contact', 'Contact']].map(([to, label]) => (
-            <Link
-              key={to}
-              to={to}
-              className={`text-xs font-mono tracking-widest uppercase transition-colors ${muted} ${hover}`}
-            >
-              {label}
-            </Link>
-          ))}
+        <nav className="flex flex-col items-center gap-4">
+          {/* Page links */}
+          <div className="flex flex-wrap items-center justify-center gap-5">
+            {[['/', 'Home'], ['/works', 'Works'], ['/contact', 'Contact']].map(([to, label]) => (
+              <Link
+                key={to}
+                to={to}
+                className={`text-xs font-mono tracking-widest uppercase transition-colors ${muted} ${hover}`}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
 
-          {/* Divider */}
-          <span className={`w-px h-3 ${isDarkMode ? 'bg-white/20' : 'bg-black/20'}`} />
-
-          {/* GitHub */}
+          {/* Social icons */}
+          <div className="flex items-center gap-4">
           <a href="https://github.com/cyperpro20" target="_blank" rel="noopener noreferrer"
             title="GitHub"
             className={`transition-colors ${muted} ${hover}`}>
@@ -69,6 +70,7 @@ const Footer = ({ isDarkMode }) => {
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
           </a>
+          </div>
         </nav>
 
         {/* Copyright */}
