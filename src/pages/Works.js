@@ -79,7 +79,7 @@ const projects = [
       'Driver, carrier & truck info support',
     ],
     link: 'https://eldtrip-plannner.netlify.app',
-    github: 'https://github.com/cyperpro20/eldtrip-planner',
+    github: 'https://github.com/ProlificDev/eld-trip-planner',
   },
 ];
 
