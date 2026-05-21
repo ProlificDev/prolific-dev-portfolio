@@ -68,16 +68,17 @@ const projects = [
     year: '2026',
     category: 'Tool · React',
     description:
-      'A trip planning tool built for truck drivers — calculates HOS-compliant routes and auto-generates ELD daily log sheets for property-carrying drivers.',
+      'Enter your trip details and get a fully HOS-compliant schedule with ELD log sheets — automatically. Built for truck drivers to stay FMCSA compliant on every route.',
     technologies: ['React', 'React Router', 'Netlify', 'CSS3'],
     features: [
-      'HOS-compliant route calculation',
+      'HOS-compliant trip schedule generation',
       'Auto-generated ELD daily log sheets',
-      'Built for property-carrying truck drivers',
-      'Simple, fast trip input',
-      'Mobile-friendly interface',
+      '11h max driving/day enforcement',
+      '70h/8-day cycle tracking',
+      'Auto fuel stop calculation',
+      'Driver, carrier & truck info support',
     ],
-    link: 'https://eldtrip-planner.netlify.app',
+    link: 'https://eldtrip-plannner.netlify.app',
     github: 'https://github.com/cyperpro20/eldtrip-planner',
   },
 ];
