@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const skills = [
   { category: 'Frontend',  items: ['React', 'JavaScript (ES6+)', 'HTML5 & CSS3', 'Tailwind CSS'] },
+  { category: 'Backend',   items: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB'] },
   { category: 'Tooling',   items: ['Git & GitHub', 'Webpack', 'NPM / Yarn', 'VS Code'] },
   { category: 'Design',    items: ['UI/UX Principles', 'Figma', 'CSS Animations', 'Accessibility'] },
-  { category: 'Other',     items: ['REST APIs', 'Performance', 'SEO Basics', 'Problem Solving'] },
 ];
 
 const stats = [
@@ -14,7 +14,7 @@ const stats = [
   { value: '100%', label: 'Satisfaction' },
 ];
 
-const roles = ['Frontend Dev', 'React Engineer', 'UI Craftsman', 'Web Builder'];
+const roles = ['Full Stack Dev', 'React Engineer', 'Node.js Builder', 'UI Craftsman'];
 
 const WordCycler = ({ isDarkMode }) => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -115,9 +115,9 @@ const Home = ({ isDarkMode }) => {
 
         {/* Sub-line */}
         <p className={`text-sm md:text-base max-w-md leading-relaxed mt-6 mb-8 animate-slide-up-fade-4 ${muted}`}>
-          I'm <span className={strong}>Emmanuel Awuzie</span> — a frontend developer
+          I'm <span className={strong}>Emmanuel Awuzie</span> — a full stack developer
           with <span className={strong}>4 years</span> of professional experience
-          designing and building high-performance web applications. I go by{' '}
+          designing and building high-performance web applications, end to end. I go by{' '}
           <span className="text-blue-500 font-semibold">ProlificDev</span> — a name
           that reflects my commitment to shipping quality work, consistently.
         </p>
@@ -172,15 +172,16 @@ const Home = ({ isDarkMode }) => {
         </h2>
         <div className={`space-y-4 text-sm leading-relaxed ${muted}`}>
           <p>
-            I'm <span className={strong}>Emmanuel Awuzie</span>, a frontend developer
+            I'm <span className={strong}>Emmanuel Awuzie</span>, a full stack developer
             known professionally as <span className="text-blue-500 font-semibold">ProlificDev</span>.
             Over the past 4 years, I've built and shipped production-ready web applications
-            for real clients — from e-commerce platforms to interactive landing pages.
+            for real clients — from e-commerce platforms to SaaS products, handling everything
+            from database to UI.
           </p>
           <p>
-            My core stack is <span className={strong}>React and modern JavaScript</span>, paired
-            with a sharp eye for UI design and a relentless focus on performance. I don't just
-            write code — I craft experiences that feel intuitive, look great, and load fast.
+            My stack spans <span className={strong}>React, Node.js, Express, and MongoDB</span> on the
+            backend, paired with a sharp eye for UI design and a relentless focus on performance.
+            I don't just write code — I architect full products that feel intuitive, look great, and scale.
           </p>
           <p>
             I work remotely and collaborate with clients and teams across the globe.
@@ -236,12 +237,12 @@ const Home = ({ isDarkMode }) => {
             <p>
               When Emmanuel looks at a UI, he doesn't just see buttons and divs. He sees{' '}
               <span className={strong}>systems of energy</span> — state flowing through components like current
-              through a circuit, animations obeying the same laws as oscillating waves, layouts governed
-              by the same proportional harmony found in nature's equations.
+              through a circuit, server responses travelling like signals across a network, animations
+              obeying the same laws as oscillating waves.
             </p>
             <p>
               Tesla once said the present is theirs, but the future belongs to those who build it.
-              Emmanuel builds for the future — one component at a time.
+              Emmanuel builds for the future — full stack, end to end.
             </p>
           </div>
 

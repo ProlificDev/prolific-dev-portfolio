@@ -48,7 +48,7 @@ const Contact = ({ isDarkMode }) => {
         </h1>
         <p className={`mt-4 text-sm leading-relaxed max-w-sm mx-auto ${muted}`}>
           I'm <span className={isDarkMode ? 'text-white font-medium' : 'text-black font-medium'}>Emmanuel Awuzie</span> — aka <span className="text-blue-500 font-semibold">ProlificDev</span>.
-          Whether you have a project, a question, or an opportunity, I'd love to hear from you.
+          Full stack developer. Whether you have a project, a question, or an opportunity, I'd love to hear from you.
         </p>
       </section>
 
