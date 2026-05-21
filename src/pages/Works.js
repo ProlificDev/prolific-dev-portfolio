@@ -38,8 +38,47 @@ const projects = [
       'Spam-filter-safe message delivery',
       'Trusted by users across 30+ countries',
     ],
-    link: 'https://numshift.netlify.app',
+    link: 'https://numshift.online',
     github: 'https://github.com/cyperpro20/NumShift',
+  },
+  {
+    id: 3,
+    index: '03',
+    title: 'ReachBack',
+    year: '2026',
+    category: 'SaaS · React',
+    description:
+      'A social media backup tool that protects your followers and friends list across all major platforms. If your account gets banned, your full contact list is ready to rebuild instantly.',
+    technologies: ['React', 'React Router', 'AES-256 Encryption', 'Netlify', 'CSS3'],
+    features: [
+      'Backup followers from 5 platforms',
+      'AES-256 encrypted contact storage',
+      'Instant recovery after a ban',
+      'Export contacts as CSV anytime',
+      'Simple file upload — no tech skills needed',
+      'You own & control your data',
+    ],
+    link: 'https://reachback.netlify.app',
+    github: 'https://github.com/cyperpro20/reachback',
+  },
+  {
+    id: 4,
+    index: '04',
+    title: 'EldTrip Planner',
+    year: '2026',
+    category: 'Tool · React',
+    description:
+      'A trip planning tool built for truck drivers — calculates HOS-compliant routes and auto-generates ELD daily log sheets for property-carrying drivers.',
+    technologies: ['React', 'React Router', 'Netlify', 'CSS3'],
+    features: [
+      'HOS-compliant route calculation',
+      'Auto-generated ELD daily log sheets',
+      'Built for property-carrying truck drivers',
+      'Simple, fast trip input',
+      'Mobile-friendly interface',
+    ],
+    link: 'https://eldtrip-planner.netlify.app',
+    github: 'https://github.com/cyperpro20/eldtrip-planner',
   },
 ];
 
