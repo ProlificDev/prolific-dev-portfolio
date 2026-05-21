@@ -41,7 +41,7 @@ const Contact = ({ isDarkMode }) => {
     <div className={`${bg} transition-colors duration-300`}>
 
       {/* ── HEADER ── */}
-      <section className="pt-28 pb-12 px-5 max-w-2xl mx-auto text-center">
+      <section className="pt-32 pb-12 px-5 max-w-2xl mx-auto text-center">
         <p className={`text-[10px] font-mono tracking-widest uppercase mb-4 ${muted}`}>Contact</p>
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-black leading-tight tracking-tight">
           Let's build <span className="text-blue-500">something.</span>

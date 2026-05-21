@@ -73,7 +73,7 @@ const Home = ({ isDarkMode }) => {
     <div className={`${bg} transition-colors duration-300`}>
 
       {/* ══ HERO ══ */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-5 pt-20 pb-12 overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-5 pt-24 pb-12 overflow-hidden">
 
         {/* Animated background orbs */}
         <div className="hero-bg">
@@ -187,6 +187,79 @@ const Home = ({ isDarkMode }) => {
             Whether you need a full product built from scratch or an existing codebase
             improved, I bring professionalism, clear communication, and clean code to every project.
           </p>
+        </div>
+      </section>
+
+      {/* ══ TESLA / ORIGIN STORY ══ */}
+      <section className={`border-t ${border} py-16 px-5`}>
+        <div className="max-w-2xl mx-auto">
+
+          {/* Header */}
+          <div className="text-center mb-12">
+            <p className={`text-[10px] font-mono tracking-widest uppercase mb-4 ${muted}`}>The Mind Behind the Code</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight">
+              Wired differently.{' '}
+              <span className="text-blue-500">By design.</span>
+            </h2>
+          </div>
+
+          {/* Tesla quote card */}
+          <div className={`rounded-2xl p-6 sm:p-8 mb-10 relative overflow-hidden ${
+            isDarkMode ? 'bg-white/5 border border-white/10' : 'bg-black/[0.03] border border-black/10'
+          }`}>
+            {/* Big decorative quote mark */}
+            <span className="absolute top-4 left-5 text-7xl font-black text-blue-500 opacity-10 leading-none select-none">"</span>
+            <blockquote className="relative z-10 text-center">
+              <p className={`text-base sm:text-lg font-medium leading-relaxed italic mb-4 ${isDarkMode ? 'text-white/80' : 'text-black/80'}`}>
+                "If you want to find the secrets of the universe, think in terms of energy, frequency and vibration."
+              </p>
+              <footer className={`text-xs font-mono tracking-widest uppercase ${muted}`}>
+                — Nikola Tesla · Inventor, Physicist, Visionary
+              </footer>
+            </blockquote>
+          </div>
+
+          {/* Story paragraphs */}
+          <div className={`space-y-5 text-sm leading-relaxed ${muted}`}>
+            <p>
+              Before Emmanuel ever wrote a line of code, he was obsessed with something else entirely —
+              the invisible forces that govern reality. <span className={strong}>Physics and mathematics</span> weren't
+              just school subjects. They were puzzles that kept him up at night, the same way a stubborn
+              bug does today.
+            </p>
+            <p>
+              His mentor? <span className={strong}>Nikola Tesla</span> — a man who didn't just think about electricity,
+              he <em>felt</em> it. Tesla could visualise entire machines in his mind before touching a single
+              component. That obsession with mental models, with understanding systems at their core before
+              building them, is something Emmanuel carries into every project.
+            </p>
+            <p>
+              When Emmanuel looks at a UI, he doesn't just see buttons and divs. He sees{' '}
+              <span className={strong}>systems of energy</span> — state flowing through components like current
+              through a circuit, animations obeying the same laws as oscillating waves, layouts governed
+              by the same proportional harmony found in nature's equations.
+            </p>
+            <p>
+              Tesla once said the present is theirs, but the future belongs to those who build it.
+              Emmanuel builds for the future — one component at a time.
+            </p>
+          </div>
+
+          {/* Fun facts row */}
+          <div className={`mt-10 grid grid-cols-3 gap-px ${isDarkMode ? 'bg-white/10' : 'bg-black/10'}`}>
+            {[
+              { icon: '⚡', label: 'Tesla fan', sub: 'since age 14' },
+              { icon: '∑', label: 'Maths lover', sub: 'calculus to logic' },
+              { icon: '🌊', label: 'Physics mind', sub: 'waves & systems' },
+            ].map(({ icon, label, sub }) => (
+              <div key={label} className={`${cardBg} p-4 text-center`}>
+                <div className="text-2xl mb-2">{icon}</div>
+                <p className={`text-xs font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-black'}`}>{label}</p>
+                <p className={`text-[10px] font-mono ${muted}`}>{sub}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
