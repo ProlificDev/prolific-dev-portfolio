@@ -20,7 +20,7 @@ const projects = [
     ],
     link: 'https://kennis-ph.netlify.app',
     github: 'https://github.com/cyperpro20/kennis-power-house',
-    screenshot: 'https://pageshot.site/v1/screenshot?url=https://kennis-ph.netlify.app',
+    screenshot: 'https://api.microlink.io/?url=https://kennis-ph.netlify.app&screenshot=true&meta=false&embed=screenshot.url',
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ const projects = [
     ],
     link: 'https://numshift.online',
     github: 'https://github.com/cyperpro20/NumShift',
-    screenshot: 'https://pageshot.site/v1/screenshot?url=https://numshift.online',
+    screenshot: 'https://api.microlink.io/?url=https://numshift.online&screenshot=true&meta=false&embed=screenshot.url',
   },
   {
     id: 3,
@@ -62,7 +62,7 @@ const projects = [
     ],
     link: 'https://reachback.netlify.app',
     github: 'https://github.com/cyperpro20/reachback',
-    screenshot: 'https://pageshot.site/v1/screenshot?url=https://reachback.netlify.app',
+    screenshot: 'https://api.microlink.io/?url=https://reachback.netlify.app&screenshot=true&meta=false&embed=screenshot.url',
   },
   {
     id: 4,
@@ -83,7 +83,7 @@ const projects = [
     ],
     link: 'https://eldtrip-plannner.netlify.app',
     github: 'https://github.com/ProlificDev/eld-trip-planner',
-    screenshot: 'https://pageshot.site/v1/screenshot?url=https://eldtrip-plannner.netlify.app',
+    screenshot: 'https://api.microlink.io/?url=https://eldtrip-plannner.netlify.app&screenshot=true&meta=false&embed=screenshot.url',
   },
 ];
 
@@ -120,21 +120,22 @@ const Works = ({ isDarkMode }) => {
               className={`group block mb-8 rounded-2xl overflow-hidden border relative ${isDarkMode ? 'border-white/10' : 'border-black/10'}`}
               style={{ aspectRatio: '16/9' }}
             >
+              {/* Loading skeleton */}
+              <div className={`absolute inset-0 ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} animate-pulse`} />
               <img
                 src={project.screenshot}
                 alt={`${project.title} screenshot`}
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                className="relative w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
+                onLoad={(e) => { e.target.previousSibling.style.display = 'none'; }}
                 onError={(e) => {
+                  e.target.previousSibling.style.display = 'none';
                   e.target.style.display = 'none';
                   e.target.nextSibling.style.display = 'flex';
                 }}
               />
-              {/* Fallback if screenshot fails */}
-              <div
-                className={`absolute inset-0 items-center justify-center text-xs font-mono hidden ${muted}`}
-                style={{ display: 'none' }}
-              >
+              {/* Fallback */}
+              <div className={`absolute inset-0 items-center justify-center text-xs font-mono hidden ${muted}`}>
                 {project.title}
               </div>
               {/* Hover overlay */}
