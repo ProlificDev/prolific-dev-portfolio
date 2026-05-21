@@ -24,6 +24,18 @@ body {
   50%       { opacity: 0; }
 }
 
+/* Navbar link drop-in on mount */
+@keyframes navLinkDrop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Active dot pop */
+@keyframes dotPop {
+  from { transform: translateX(-50%) scale(0); opacity: 0; }
+  to   { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
 /* Logo pulse glow animation */
 @keyframes logoPulse {
   0%, 100% {
