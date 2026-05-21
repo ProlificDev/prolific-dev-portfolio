@@ -20,6 +20,7 @@ const projects = [
     ],
     link: 'https://kennis-ph.netlify.app',
     github: 'https://github.com/cyperpro20/kennis-power-house',
+    screenshot: 'https://pageshot.site/v1/screenshot?url=https://kennis-ph.netlify.app',
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const projects = [
     ],
     link: 'https://numshift.online',
     github: 'https://github.com/cyperpro20/NumShift',
+    screenshot: 'https://pageshot.site/v1/screenshot?url=https://numshift.online',
   },
   {
     id: 3,
@@ -60,6 +62,7 @@ const projects = [
     ],
     link: 'https://reachback.netlify.app',
     github: 'https://github.com/cyperpro20/reachback',
+    screenshot: 'https://pageshot.site/v1/screenshot?url=https://reachback.netlify.app',
   },
   {
     id: 4,
@@ -80,6 +83,7 @@ const projects = [
     ],
     link: 'https://eldtrip-plannner.netlify.app',
     github: 'https://github.com/ProlificDev/eld-trip-planner',
+    screenshot: 'https://pageshot.site/v1/screenshot?url=https://eldtrip-plannner.netlify.app',
   },
 ];
 
@@ -107,6 +111,39 @@ const Works = ({ isDarkMode }) => {
       <section className="px-5 max-w-2xl mx-auto py-6">
         {projects.map((project) => (
           <div key={project.id} className={`border-b ${border} py-12 text-center`}>
+
+            {/* Screenshot preview */}
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group block mb-8 rounded-2xl overflow-hidden border relative ${isDarkMode ? 'border-white/10' : 'border-black/10'}`}
+              style={{ aspectRatio: '16/9' }}
+            >
+              <img
+                src={project.screenshot}
+                alt={`${project.title} screenshot`}
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+              {/* Fallback if screenshot fails */}
+              <div
+                className={`absolute inset-0 items-center justify-center text-xs font-mono hidden ${muted}`}
+                style={{ display: 'none' }}
+              >
+                {project.title}
+              </div>
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-all duration-300 flex items-center justify-center">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs font-semibold bg-black/60 px-3 py-1.5 rounded-full backdrop-blur-sm">
+                  Visit site ↗
+                </span>
+              </div>
+            </a>
 
             {/* Index + category */}
             <p className={`text-[10px] font-mono tracking-widest uppercase mb-3 ${muted}`}>
