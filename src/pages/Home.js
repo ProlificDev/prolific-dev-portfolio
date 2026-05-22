@@ -337,6 +337,20 @@ const Home = ({ isDarkMode }) => {
               <span className={`text-xs font-semibold shrink-0 ml-4 transition-transform duration-200 group-hover:translate-x-1 ${isDarkMode ? 'text-white/40' : 'text-black/40'}`}>↗</span>
             </div>
           </a>
+
+          {/* View more button */}
+          <div className="mt-6 text-center">
+            <Link
+              to="/works"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold rounded-full transition-all duration-200 hover:shadow-[0_0_24px_rgba(0,102,255,0.4)]"
+            >
+              View all projects
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+
         </div>
       </section>
 

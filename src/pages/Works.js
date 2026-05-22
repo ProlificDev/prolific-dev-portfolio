@@ -126,7 +126,6 @@ const Works = ({ isDarkMode }) => {
                 src={project.screenshot}
                 alt={`${project.title} screenshot`}
                 className="relative w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
                 onLoad={(e) => { e.target.previousSibling.style.display = 'none'; }}
                 onError={(e) => {
                   e.target.previousSibling.style.display = 'none';
