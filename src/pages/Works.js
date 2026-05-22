@@ -20,7 +20,7 @@ const projects = [
     ],
     link: 'https://kennis-ph.netlify.app',
     github: 'https://github.com/cyperpro20/kennis-power-house',
-    screenshot: 'https://api.microlink.io/?url=https://kennis-ph.netlify.app&screenshot=true&meta=false&embed=screenshot.url',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://kennis-ph.netlify.app',
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ const projects = [
     ],
     link: 'https://numshift.online',
     github: 'https://github.com/cyperpro20/NumShift',
-    screenshot: 'https://api.microlink.io/?url=https://numshift.online&screenshot=true&meta=false&embed=screenshot.url',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://numshift.online',
   },
   {
     id: 3,
@@ -62,7 +62,7 @@ const projects = [
     ],
     link: 'https://reachback.netlify.app',
     github: 'https://github.com/cyperpro20/reachback',
-    screenshot: 'https://api.microlink.io/?url=https://reachback.netlify.app&screenshot=true&meta=false&embed=screenshot.url',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://reachback.netlify.app',
   },
   {
     id: 4,
@@ -83,7 +83,7 @@ const projects = [
     ],
     link: 'https://eldtrip-plannner.netlify.app',
     github: 'https://github.com/ProlificDev/eld-trip-planner',
-    screenshot: 'https://api.microlink.io/?url=https://eldtrip-plannner.netlify.app&screenshot=true&meta=false&embed=screenshot.url',
+    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://eldtrip-plannner.netlify.app',
   },
 ];
 
