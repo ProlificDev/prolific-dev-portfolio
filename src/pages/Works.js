@@ -9,7 +9,7 @@ const projects = [
     category: 'E-Commerce · React',
     description:
       'A full-featured e-commerce platform for phone accessories and tech solutions. Built with React, Context API, and WhatsApp order integration. Fully responsive with a light/dark mode toggle.',
-    technologies: ['React', 'React Router', 'Context API', 'CSS3', 'Responsive Design'],
+    technologies: ['React', 'JavaScript', 'CSS3', 'HTML5', 'Context API'],
     features: [
       'Product catalog with filtering',
       'Shopping cart with quantity control',
@@ -19,7 +19,7 @@ const projects = [
       'Smooth page transitions',
     ],
     link: 'https://kennis-ph.netlify.app',
-    github: 'https://github.com/cyperpro20/kennis-power-house',
+    github: 'https://github.com/ProlificDev/Kennis-power-house',
     screenshot: '/images/kennis.jpg',
   },
   {
@@ -30,7 +30,7 @@ const projects = [
     category: 'SaaS · React',
     description:
       'A WhatsApp account recovery tool that notifies all your contacts of your new number — with a personalised message and a voice note to prove it\'s really you. No spam flags. No scam vibes.',
-    technologies: ['React', 'React Router', 'Netlify', 'Cloud SMS', 'CSS3'],
+    technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Netlify'],
     features: [
       'Secure contact sync from phonebook',
       'Voice note recording & cloud hosting',
@@ -51,7 +51,7 @@ const projects = [
     category: 'SaaS · React',
     description:
       'A social media backup tool that protects your followers and friends list across all major platforms. If your account gets banned, your full contact list is ready to rebuild instantly.',
-    technologies: ['React', 'React Router', 'AES-256 Encryption', 'Netlify', 'CSS3'],
+    technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Netlify'],
     features: [
       'Backup followers from 5 platforms',
       'AES-256 encrypted contact storage',
@@ -69,17 +69,17 @@ const projects = [
     index: '04',
     title: 'EldTrip Planner',
     year: '2026',
-    category: 'Tool · React',
+    category: 'Full Stack · React · Django',
     description:
       'Enter your trip details and get a fully HOS-compliant schedule with ELD log sheets — automatically. Built for truck drivers to stay FMCSA compliant on every route.',
-    technologies: ['React', 'React Router', 'Netlify', 'CSS3'],
+    technologies: ['React', 'Vite', 'Tailwind CSS', 'Django', 'Django REST Framework', 'Python', 'Leaflet.js', 'Render'],
     features: [
       'HOS-compliant trip schedule generation',
       'Auto-generated ELD daily log sheets',
       '11h max driving/day enforcement',
       '70h/8-day cycle tracking',
       'Auto fuel stop calculation',
-      'Driver, carrier & truck info support',
+      'Interactive route map with Leaflet.js',
     ],
     link: 'https://eldtrip-plannner.netlify.app',
     github: 'https://github.com/ProlificDev/eld-trip-planner',
