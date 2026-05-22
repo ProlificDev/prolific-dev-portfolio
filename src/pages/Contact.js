@@ -15,7 +15,7 @@ const Contact = ({ isDarkMode }) => {
     const phone = rawPhone.startsWith('+') ? rawPhone.slice(1) : rawPhone; // eslint-disable-line no-unused-vars
     const text = `Hi Emmanuel (ProlificDev)!%0A%0AName: ${encodeURIComponent(form.name)}%0AEmail: ${encodeURIComponent(form.email)}%0APhone: ${encodeURIComponent(form.phone)}%0A%0AMessage:%0A${encodeURIComponent(form.message)}`;
     // Opens WhatsApp from the visitor's own number to yours
-    window.open(`https://wa.me/2349013922440?text=${text}`, '_blank');
+    window.open(`https://wa.me/2348154121633?text=${text}`, '_blank');
     setSent(true);
     setForm({ name: '', email: '', phone: '', message: '' });
     setTimeout(() => setSent(false), 4000);
@@ -30,9 +30,9 @@ const Contact = ({ isDarkMode }) => {
 
   const contactItems = [
     { label: 'Email',     value: 'Prolificdevinnovations@gmail.com', href: 'mailto:Prolificdevinnovations@gmail.com',                          mono: true  },
-    { label: 'WhatsApp',  value: '+234 901 392 2440',               href: 'https://wa.me/2349013922440',                                         mono: true  },
-    { label: 'GitHub',    value: 'github.com/cyperpro20',    href: 'https://github.com/cyperpro20',                                  mono: false },
-    { label: 'LinkedIn',  value: 'linkedin.com/in/cypher-pro', href: 'https://www.linkedin.com/in/cypher-pro-0289632b9',            mono: false },
+    { label: 'WhatsApp',  value: '+234 815 412 1633',               href: 'https://wa.me/2348154121633',                                         mono: true  },
+    { label: 'GitHub',    value: 'github.com/ProlificDev',    href: 'https://github.com/ProlificDev',                                  mono: false },
+    { label: 'LinkedIn',  value: 'linkedin.com/in/prolific-dev', href: 'https://www.linkedin.com/in/prolific-dev-0289632b9',            mono: false },
     { label: 'Instagram', value: '@prolificdev.ai',          href: 'https://www.instagram.com/prolificdev.ai?igsh=NXU1M2IxNGF2OHpn', mono: false },
     { label: 'X / Twitter', value: '@master_pia71229',       href: 'https://x.com/master_pia71229?t=zlZuVyl11utd63kwfePaSw&s=09',   mono: false },
   ];
