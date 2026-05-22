@@ -20,7 +20,7 @@ const projects = [
     ],
     link: 'https://kennis-ph.netlify.app',
     github: 'https://github.com/cyperpro20/kennis-power-house',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://kennis-ph.netlify.app',
+    screenshot: '/images/kennis.jpg',
   },
   {
     id: 2,
@@ -39,9 +39,9 @@ const projects = [
       'Spam-filter-safe message delivery',
       'Trusted by users across 30+ countries',
     ],
-    link: 'https://numshift.online',
+    link: 'https://numshift.netlify.app',
     github: 'https://github.com/cyperpro20/NumShift',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://numshift.online',
+    screenshot: '/images/numshift.jpg',
   },
   {
     id: 3,
@@ -62,7 +62,7 @@ const projects = [
     ],
     link: 'https://reachback.netlify.app',
     github: 'https://github.com/cyperpro20/reachback',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://reachback.netlify.app',
+    screenshot: '/images/reachback.jpg',
   },
   {
     id: 4,
@@ -83,7 +83,7 @@ const projects = [
     ],
     link: 'https://eldtrip-plannner.netlify.app',
     github: 'https://github.com/ProlificDev/eld-trip-planner',
-    screenshot: 'https://image.thum.io/get/width/1200/crop/630/https://eldtrip-plannner.netlify.app',
+    screenshot: '/images/eldtrip.jpg',
   },
 ];
 

@@ -283,6 +283,63 @@ const Home = ({ isDarkMode }) => {
         </div>
       </section>
 
+      {/* ══ FEATURED PROJECT ══ */}
+      <section className={`border-t ${border} py-16 px-5`}>
+        <div className="max-w-3xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <p className={`text-[10px] font-mono tracking-widest uppercase mb-1 ${muted}`}>Featured Work</p>
+              <h2 className="text-xl sm:text-2xl font-black">Latest project.</h2>
+            </div>
+            <Link
+              to="/works"
+              className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all duration-200 ${
+                isDarkMode
+                  ? 'border-white/20 text-white/60 hover:border-white/50 hover:text-white'
+                  : 'border-black/20 text-black/60 hover:border-black/50 hover:text-black'
+              }`}
+            >
+              View all ↗
+            </Link>
+          </div>
+
+          {/* Featured card — NumShift */}
+          <a
+            href="https://numshift.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`group block rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,102,255,0.15)] ${
+              isDarkMode ? 'border-white/10 hover:border-blue-500/30' : 'border-black/10 hover:border-blue-500/30'
+            }`}
+          >
+            {/* Screenshot */}
+            <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
+              <div className={`absolute inset-0 ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} animate-pulse`} />
+              <img
+                src="/images/numshift.jpg"
+                alt="NumShift screenshot"
+                className="relative w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                onLoad={(e) => { e.target.previousSibling.style.display = 'none'; }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 flex gap-2">
+                <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full bg-blue-500/90 text-white">SaaS</span>
+                <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full bg-black/60 text-white backdrop-blur-sm">2026</span>
+              </div>
+            </div>
+
+            {/* Info */}
+            <div className={`p-5 flex items-center justify-between ${isDarkMode ? 'bg-white/5' : 'bg-black/[0.02]'}`}>
+              <div>
+                <h3 className="font-black text-lg mb-0.5">NumShift</h3>
+                <p className={`text-xs ${muted}`}>WhatsApp account recovery · Bulk SMS · Voice note verification</p>
+              </div>
+              <span className={`text-xs font-semibold shrink-0 ml-4 transition-transform duration-200 group-hover:translate-x-1 ${isDarkMode ? 'text-white/40' : 'text-black/40'}`}>↗</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
       {/* ══ CTA BANNER ══ */}
       <section className="py-16 px-5">
         <div className="max-w-3xl mx-auto">
