@@ -60,23 +60,8 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         >
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group shrink-0">
-            <div className="relative w-7 h-7 shrink-0 overflow-hidden logo-shimmer">
-              <svg
-                className="absolute inset-0 w-7 h-7 transition-transform duration-700 group-hover:rotate-180"
-                viewBox="0 0 32 32" fill="none"
-              >
-                <circle cx="16" cy="16" r="14" stroke="#0066ff" strokeWidth="1.5"
-                  strokeDasharray="6 4" strokeLinecap="round" opacity="0.4" />
-              </svg>
-              <svg
-                className="absolute inset-0 w-7 h-7"
-                viewBox="0 0 32 32" fill="none"
-                style={{ filter: 'drop-shadow(0 0 4px rgba(0,102,255,0.5))', animation: 'logoPulse 2.5s ease-in-out infinite' }}
-              >
-                <circle cx="16" cy="16" r="11" fill="#0066ff" />
-                <text x="16" y="21" textAnchor="middle" fill="white"
-                  fontSize="13" fontWeight="900" fontFamily="Inter, Arial Black, sans-serif">P</text>
-              </svg>
+            <div className="relative w-7 h-7 shrink-0 overflow-hidden rounded-full border border-white/10 shadow-[0_0_8px_rgba(0,102,255,0.5)]" style={{ animation: 'logoPulse 2.5s ease-in-out infinite' }}>
+              <img src="/favicon.png" alt="ProlificDev Logo" className="w-full h-full object-cover" />
             </div>
             <span className={`text-xs font-bold tracking-tight hidden sm:block ${isDarkMode ? 'text-white' : 'text-black'}`}>
               Prolific<span className="text-blue-500">Dev</span>
