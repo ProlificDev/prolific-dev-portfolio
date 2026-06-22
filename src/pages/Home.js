@@ -85,6 +85,15 @@ const Home = ({ isDarkMode }) => {
         {/* Content wrapper — keeps max-width constraint */}
         <div className="relative z-10 max-w-3xl mx-auto w-full flex flex-col items-center">
 
+        {/* Profile Avatar */}
+        <div className="mb-6 animate-slide-up-fade-1">
+          <img
+            src="/favicon.png"
+            alt="ProlificDev Logo"
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white/10 shadow-[0_0_24px_rgba(0,102,255,0.4)]"
+          />
+        </div>
+
         {/* Status badge */}
         <div className="mb-6 animate-slide-up-fade-1">
           <span className={`
@@ -99,14 +108,14 @@ const Home = ({ isDarkMode }) => {
         {/* Greeting */}
         <div className="mb-2 animate-slide-up-fade-2">
           <p className={`text-sm md:text-base font-mono ${muted}`}>
-            Emmanuel Awuzie · aka <span className="text-blue-500 font-semibold">ProlificDev</span>
+            Ifechukwu Awuzie · aka <span className="text-blue-500 font-semibold">ProlificDev</span>
           </p>
         </div>
 
         {/* Big name + word cycler */}
         <div className="animate-slide-up-fade-3 w-full text-center">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-tight tracking-tight mb-2">
-            Emmanuel Awuzie
+            Ifechukwu Awuzie
           </h1>
           <div className="flex items-center justify-center min-h-[1.2em]">
             <WordCycler isDarkMode={isDarkMode} />
@@ -115,7 +124,7 @@ const Home = ({ isDarkMode }) => {
 
         {/* Sub-line */}
         <p className={`text-sm md:text-base max-w-md leading-relaxed mt-6 mb-8 animate-slide-up-fade-4 ${muted}`}>
-          I'm <span className={strong}>Emmanuel Awuzie</span> — a full stack developer
+          I'm <span className={strong}>Ifechukwu Awuzie</span> — a full stack developer
           with <span className={strong}>4 years</span> of professional experience
           designing and building high-performance web applications, end to end. I go by{' '}
           <span className="text-blue-500 font-semibold">ProlificDev</span> — a name
@@ -140,6 +149,20 @@ const Home = ({ isDarkMode }) => {
           >
             Get in touch
           </Link>
+          <a
+            href="/Ifechukwu_Awuzie_CV.pdf"
+            download
+            className={`w-full sm:w-auto px-6 py-2.5 text-sm font-semibold rounded-full border transition-all duration-200 inline-flex items-center justify-center gap-2 ${
+              isDarkMode
+                ? 'border-white/20 text-white/70 hover:border-white/50 hover:text-white'
+                : 'border-black/20 text-black/70 hover:border-black/50 hover:text-black'
+            }`}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" />
+            </svg>
+            Download CV
+          </a>
         </div>
 
         {/* Scroll hint */}
@@ -172,7 +195,7 @@ const Home = ({ isDarkMode }) => {
         </h2>
         <div className={`space-y-4 text-sm leading-relaxed ${muted}`}>
           <p>
-            I'm <span className={strong}>Emmanuel Awuzie</span>, a full stack developer
+            I'm <span className={strong}>Ifechukwu Awuzie</span>, a full stack developer
             known professionally as <span className="text-blue-500 font-semibold">ProlificDev</span>.
             Over the past 4 years, I've built and shipped production-ready web applications
             for real clients — from e-commerce platforms to SaaS products, handling everything
@@ -196,7 +219,12 @@ const Home = ({ isDarkMode }) => {
         <div className="max-w-2xl mx-auto">
 
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 flex flex-col items-center">
+            <img
+              src="/favicon.png"
+              alt="ProlificDev Logo"
+              className="w-16 h-16 sm:w-20 sm:h-20 mb-6 rounded-full object-cover border-2 border-blue-500/30 shadow-[0_0_16px_rgba(0,102,255,0.2)]"
+            />
             <p className={`text-[10px] font-mono tracking-widest uppercase mb-4 ${muted}`}>The Mind Behind the Code</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight">
               Wired differently.{' '}
@@ -223,7 +251,7 @@ const Home = ({ isDarkMode }) => {
           {/* Story paragraphs */}
           <div className={`space-y-5 text-sm leading-relaxed ${muted}`}>
             <p>
-              Before Emmanuel ever wrote a line of code, he was obsessed with something else entirely —
+              Before Ifechukwu ever wrote a line of code, he was obsessed with something else entirely —
               the invisible forces that govern reality. <span className={strong}>Physics and mathematics</span> weren't
               just school subjects. They were puzzles that kept him up at night, the same way a stubborn
               bug does today.
@@ -232,17 +260,17 @@ const Home = ({ isDarkMode }) => {
               His mentor? <span className={strong}>Nikola Tesla</span> — a man who didn't just think about electricity,
               he <em>felt</em> it. Tesla could visualise entire machines in his mind before touching a single
               component. That obsession with mental models, with understanding systems at their core before
-              building them, is something Emmanuel carries into every project.
+              building them, is something Ifechukwu carries into every project.
             </p>
             <p>
-              When Emmanuel looks at a UI, he doesn't just see buttons and divs. He sees{' '}
+              When Ifechukwu looks at a UI, he doesn't just see buttons and divs. He sees{' '}
               <span className={strong}>systems of energy</span> — state flowing through components like current
               through a circuit, server responses travelling like signals across a network, animations
               obeying the same laws as oscillating waves.
             </p>
             <p>
               Tesla once said the present is theirs, but the future belongs to those who build it.
-              Emmanuel builds for the future — full stack, end to end.
+              Ifechukwu builds for the future — full stack, end to end.
             </p>
           </div>
 
@@ -314,17 +342,14 @@ const Home = ({ isDarkMode }) => {
           >
             {/* Screenshot */}
             <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
-              <div className={`absolute inset-0 ${isDarkMode ? 'bg-white/5' : 'bg-black/5'} animate-pulse`} />
               <img
                 src="/images/numshift.jpg"
                 alt="NumShift screenshot"
                 className="relative w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                onLoad={(e) => { e.target.previousSibling.style.display = 'none'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 flex gap-2">
                 <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full bg-blue-500/90 text-white">SaaS</span>
-                <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full bg-black/60 text-white backdrop-blur-sm">2026</span>
               </div>
             </div>
 
@@ -365,7 +390,7 @@ const Home = ({ isDarkMode }) => {
             <div>
               <h2 className="text-2xl sm:text-3xl font-black mb-2">Let's build something great.</h2>
               <p className={`text-sm ${muted}`}>
-                Have a project in mind? I'm <span className={strong}>Emmanuel Awuzie</span> — and I'm ready to bring it to life.
+                Have a project in mind? I'm <span className={strong}>Ifechukwu Awuzie</span> — and I'm ready to bring it to life.
               </p>
             </div>
             <Link

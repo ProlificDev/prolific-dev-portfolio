@@ -164,6 +164,30 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         }}
       >
         <div className="p-3 flex flex-col gap-1">
+          {/* Profile card at top of mobile menu */}
+          <div
+            className={`flex items-center gap-3 px-4 py-3 mb-1 rounded-xl ${isDarkMode ? 'bg-white/5' : 'bg-black/4'}`}
+            style={{
+              transform: mobileOpen ? 'translateX(0)' : 'translateX(-8px)',
+              opacity: mobileOpen ? 1 : 0,
+              transition: 'transform 0.35s cubic-bezier(0.16,1,0.3,1) 0ms, opacity 0.3s ease 0ms',
+            }}
+          >
+            <img
+              src="/images/kennis.jpg"
+              alt="Kennis"
+              className="w-10 h-10 rounded-full object-cover shrink-0 border-2 border-blue-500/40 shadow-[0_0_12px_rgba(0,102,255,0.3)]"
+            />
+            <div className="flex flex-col min-w-0">
+              <span className={`text-sm font-semibold leading-tight truncate ${isDarkMode ? 'text-white' : 'text-black'}`}>
+                Kennis
+              </span>
+              <span className={`text-[11px] leading-tight truncate ${isDarkMode ? 'text-white/40' : 'text-black/40'}`}>
+                Full-Stack Developer
+              </span>
+            </div>
+          </div>
+
           {navLinks.map(({ to, label }, i) => {
             const isActive = location.pathname === to;
             return (

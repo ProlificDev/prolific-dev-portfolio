@@ -45,7 +45,7 @@ const Footer = ({ isDarkMode }) => {
           </a>
 
           {/* LinkedIn */}
-          <a href="https://www.linkedin.com/in/cypher-pro-0289632b9" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.linkedin.com/in/ifechukwu-awuzie-0289632b9" target="_blank" rel="noopener noreferrer"
             title="LinkedIn"
             className={`transition-colors ${muted} ${hover}`}>
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -75,7 +75,7 @@ const Footer = ({ isDarkMode }) => {
 
         {/* Copyright */}
         <p className={`text-xs font-mono ${muted}`}>
-          © {year} Emmanuel Awuzie. All rights reserved.
+          © {year} Ifechukwu Awuzie. All rights reserved.
         </p>
 
       </div>

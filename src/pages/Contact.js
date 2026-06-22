@@ -13,7 +13,7 @@ const Contact = ({ isDarkMode }) => {
     // Strip spaces/dashes from phone, ensure it starts with country code
     const rawPhone = form.phone.replace(/[\s\-()]/g, '');
     const phone = rawPhone.startsWith('+') ? rawPhone.slice(1) : rawPhone; // eslint-disable-line no-unused-vars
-    const text = `Hi Emmanuel (ProlificDev)!%0A%0AName: ${encodeURIComponent(form.name)}%0AEmail: ${encodeURIComponent(form.email)}%0APhone: ${encodeURIComponent(form.phone)}%0A%0AMessage:%0A${encodeURIComponent(form.message)}`;
+    const text = `Hi Ifechukwu (ProlificDev)!%0A%0AName: ${encodeURIComponent(form.name)}%0AEmail: ${encodeURIComponent(form.email)}%0APhone: ${encodeURIComponent(form.phone)}%0A%0AMessage:%0A${encodeURIComponent(form.message)}`;
     // Opens WhatsApp from the visitor's own number to yours
     window.open(`https://wa.me/2348154121633?text=${text}`, '_blank');
     setSent(true);
@@ -32,8 +32,9 @@ const Contact = ({ isDarkMode }) => {
     { label: 'Email',     value: 'Prolificdevinnovations@gmail.com', href: 'mailto:Prolificdevinnovations@gmail.com',                          mono: true  },
     { label: 'WhatsApp',  value: '+234 815 412 1633',               href: 'https://wa.me/2348154121633',                                         mono: true  },
     { label: 'GitHub',    value: 'github.com/ProlificDev',    href: 'https://github.com/ProlificDev',                                  mono: false },
-    { label: 'LinkedIn',  value: 'linkedin.com/in/prolific-dev', href: 'https://www.linkedin.com/in/prolific-dev-0289632b9',            mono: false },
+    { label: 'LinkedIn',  value: 'linkedin.com/in/ifechukwu-awuzie', href: 'https://www.linkedin.com/in/ifechukwu-awuzie-0289632b9',            mono: false },
     { label: 'Instagram', value: '@prolificdev.ai',          href: 'https://www.instagram.com/prolificdev.ai?igsh=NXU1M2IxNGF2OHpn', mono: false },
+    { label: 'WhatsApp Channel', value: 'Follow on WhatsApp',  href: 'https://whatsapp.com/channel/0029VbDarRkEKyZDuC1YQc1R', mono: false },
     { label: 'X / Twitter', value: '@master_pia71229',       href: 'https://x.com/master_pia71229?t=zlZuVyl11utd63kwfePaSw&s=09',   mono: false },
   ];
 
@@ -47,7 +48,7 @@ const Contact = ({ isDarkMode }) => {
           Let's build <span className="text-blue-500">something.</span>
         </h1>
         <p className={`mt-4 text-sm leading-relaxed max-w-sm mx-auto ${muted}`}>
-          I'm <span className={isDarkMode ? 'text-white font-medium' : 'text-black font-medium'}>Emmanuel Awuzie</span> — aka <span className="text-blue-500 font-semibold">ProlificDev</span>.
+          I'm <span className={isDarkMode ? 'text-white font-medium' : 'text-black font-medium'}>Ifechukwu Awuzie</span> — aka <span className="text-blue-500 font-semibold">ProlificDev</span>.
           Full stack developer. Whether you have a project, a question, or an opportunity, I'd love to hear from you.
         </p>
       </section>

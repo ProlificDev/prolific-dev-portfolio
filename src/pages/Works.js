@@ -27,10 +27,10 @@ const projects = [
     index: '02',
     title: 'NumShift',
     year: '2026',
-    category: 'SaaS · React',
+    category: 'SaaS · Full Stack',
     description:
       'A WhatsApp account recovery tool that notifies all your contacts of your new number — with a personalised message and a voice note to prove it\'s really you. No spam flags. No scam vibes.',
-    technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Netlify'],
+    technologies: ['React', 'Node.js', 'Express', 'Supabase', 'Tailwind CSS'],
     features: [
       'Secure contact sync from phonebook',
       'Voice note recording & cloud hosting',
@@ -48,10 +48,10 @@ const projects = [
     index: '03',
     title: 'ReachBack',
     year: '2026',
-    category: 'SaaS · React',
+    category: 'SaaS · Full Stack',
     description:
       'A social media backup tool that protects your followers and friends list across all major platforms. If your account gets banned, your full contact list is ready to rebuild instantly.',
-    technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Netlify'],
+    technologies: ['React', 'Node.js', 'Express', 'Supabase', 'Tailwind CSS'],
     features: [
       'Backup followers from 5 platforms',
       'AES-256 encrypted contact storage',
@@ -84,6 +84,26 @@ const projects = [
     link: 'https://eldtrip-plannner.netlify.app',
     github: 'https://github.com/ProlificDev/eld-trip-planner',
     screenshot: '/images/eldtrip.jpg',
+  },
+  {
+    id: 5,
+    index: '05',
+    title: 'MovieDrop',
+    year: '2026',
+    category: 'Web App · Full Stack',
+    description:
+      'A sleek platform for exploring movies and TV shows. Browse catalogs, find details, and discover the latest releases with an intuitive user interface.',
+    technologies: ['React', 'FastAPI', 'Python', 'Supabase', 'Tailwind CSS'],
+    features: [
+      'Comprehensive movie catalog',
+      'Fast search and filtering',
+      'Responsive UI for all devices',
+      'Dynamic API integration',
+      'Smooth animations and transitions',
+    ],
+    link: 'https://moviedrop.site/',
+    github: 'https://github.com/cyperpro20/moviedrop',
+    screenshot: '/images/moviedrop.jpg',
   },
 ];
 
@@ -147,7 +167,7 @@ const Works = ({ isDarkMode }) => {
 
             {/* Index + category */}
             <p className={`text-[10px] font-mono tracking-widest uppercase mb-3 ${muted}`}>
-              {project.index} · {project.category} · {project.year}
+              {project.index} · {project.category}
             </p>
 
             {/* Title */}
