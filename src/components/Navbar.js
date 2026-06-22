@@ -174,13 +174,13 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             }}
           >
             <img
-              src="/images/kennis.jpg"
-              alt="Kennis"
+              src="/favicon.png"
+              alt="Ifechukwu"
               className="w-10 h-10 rounded-full object-cover shrink-0 border-2 border-blue-500/40 shadow-[0_0_12px_rgba(0,102,255,0.3)]"
             />
             <div className="flex flex-col min-w-0">
               <span className={`text-sm font-semibold leading-tight truncate ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                Kennis
+                Ifechukwu
               </span>
               <span className={`text-[11px] leading-tight truncate ${isDarkMode ? 'text-white/40' : 'text-black/40'}`}>
                 Full-Stack Developer
