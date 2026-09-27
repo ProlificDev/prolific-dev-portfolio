@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 // --- ANIMATION VARIANTS ---
 const fadeUpVariants = {
@@ -159,7 +159,7 @@ const Home = () => {
   const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   const handleSubmit = (e) => {
     e.preventDefault();
-    const rawPhone = form.phone.replace(/[\s\-()]/g, '');
+
     const text = `Hi Ifechukwu!%0A%0AName: ${encodeURIComponent(form.name)}%0AEmail: ${encodeURIComponent(form.email)}%0APhone: ${encodeURIComponent(form.phone)}%0A%0AMessage:%0A${encodeURIComponent(form.message)}`;
     window.open(`https://wa.me/2348133787926?text=${text}`, '_blank');
     setSent(true);

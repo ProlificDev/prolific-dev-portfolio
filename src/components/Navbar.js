@@ -1,9 +1,4 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-
 const Navbar = () => {
-  const location = useLocation();
-
   const navLinks = [
     { to: '#home', label: 'HOME' },
     { to: '#works', label: 'WORKS' },
