@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#111] border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-3">
         
         {/* Brand */}
         <div className="flex items-center gap-2.5">
@@ -19,7 +19,7 @@ const Footer = () => {
         </p>
 
         {/* Right: nav + social */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-2 sm:mt-0">
           {[['#home', 'Home'], ['#works', 'Works'], ['#contact', 'Contact']].map(([href, label]) => (
             <a key={href} href={href} className="text-[10px] font-sans font-bold tracking-widest uppercase text-white/40 hover:text-white transition-colors">
               {label}
