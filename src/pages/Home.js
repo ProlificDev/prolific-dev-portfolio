@@ -1,492 +1,333 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-const skills = [
-  { category: 'Frontend',  items: ['React', 'JavaScript (ES6+)', 'HTML5 & CSS3', 'Tailwind CSS'] },
-  { category: 'Backend',   items: ['Node.js', 'Express.js', 'REST APIs', 'MongoDB'] },
-  { category: 'Tooling',   items: ['Git & GitHub', 'Webpack', 'NPM / Yarn', 'VS Code'] },
-  { category: 'Design',    items: ['UI/UX Principles', 'Figma', 'CSS Animations', 'Accessibility'] },
-];
-
-const stats = [
-  { value: '4+',   label: 'Years' },
-  { value: '20+',  label: 'Projects' },
-  { value: '100%', label: 'Satisfaction' },
-];
-
-const roles = ['Full Stack Dev', 'React Engineer', 'Node.js Builder', 'UI Craftsman'];
-
-const WordCycler = ({ isDarkMode }) => {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = roles[roleIndex];
-    let timeout;
-
-    if (!isDeleting && displayed.length < current.length) {
-      // Typing
-      timeout = setTimeout(() => {
-        setDisplayed(current.slice(0, displayed.length + 1));
-      }, 80);
-    } else if (!isDeleting && displayed.length === current.length) {
-      // Pause at full word
-      timeout = setTimeout(() => setIsDeleting(true), 1800);
-    } else if (isDeleting && displayed.length > 0) {
-      // Deleting
-      timeout = setTimeout(() => {
-        setDisplayed(current.slice(0, displayed.length - 1));
-      }, 45);
-    } else if (isDeleting && displayed.length === 0) {
-      // Move to next role
-      setIsDeleting(false);
-      setRoleIndex((i) => (i + 1) % roles.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, isDeleting, roleIndex]);
-
+// --- SHARED COMPONENTS ---
+const FadeUp = ({ children, delay = 0, className = '' }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
   return (
-    <span className={`inline-flex items-center font-black text-4xl sm:text-5xl md:text-7xl leading-tight tracking-tight text-blue-500`}>
-      {displayed}
-      <span
-        className="ml-[2px] inline-block w-[3px] rounded-sm bg-blue-500"
-        style={{
-          height: '0.85em',
-          animation: 'cursorBlink 1s step-end infinite',
-          verticalAlign: 'middle',
-        }}
-      />
-    </span>
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
+    >
+      {children}
+    </motion.div>
   );
 };
 
-const Home = ({ isDarkMode }) => {
-  const bg     = isDarkMode ? 'bg-[#0a0a0a] text-white' : 'bg-white text-black';
-  const muted  = isDarkMode ? 'text-white/50'            : 'text-black/50';
-  const border = isDarkMode ? 'border-white/10'          : 'border-black/10';
-  const cardBg = isDarkMode ? 'bg-white/5'               : 'bg-black/5';
-  const strong = isDarkMode ? 'text-white font-medium'   : 'text-black font-medium';
+// --- DATA ---
+const projects = [
+  { id: 1, index: '01', title: 'DigitalWash', category: 'SaaS', description: 'A laundry business management platform that replaces notebooks and spreadsheets. Manage orders, payments, expenses, staff, and multiple branches from one dashboard.', link: 'https://digitalwashapp.com', github: 'https://github.com/ProlificDev', screenshot: 'https://s0.wp.com/mshots/v1/https%3A%2F%2Fdigitalwashapp.com?w=800&h=500' },
+  { id: 2, index: '02', title: 'Kennis Power House', category: 'E-Commerce', description: 'A full-featured e-commerce platform for phone accessories and tech solutions. Built with React, Context API, and WhatsApp order integration.', link: 'https://kennis-ph.netlify.app', github: 'https://github.com/ProlificDev/Kennis-power-house', screenshot: 'https://s0.wp.com/mshots/v1/https%3A%2F%2Fkennis-ph.netlify.app?w=800&h=500' },
+  { id: 3, index: '03', title: 'NumShift', category: 'SaaS', description: "A WhatsApp account recovery tool that notifies all your contacts of your new number — with a personalised message and a voice note to prove it's really you.", link: 'https://numshift.online', github: 'https://github.com/cyperpro20/NumShift', screenshot: 'https://s0.wp.com/mshots/v1/https%3A%2F%2Fnumshift.online?w=800&h=500' },
+  { id: 4, index: '04', title: 'ReachBack', category: 'SaaS', description: 'A social media backup tool that protects your followers and friends list across all major platforms. If your account gets banned, your full contact list is ready to rebuild instantly.', link: 'https://reachback.online', github: 'https://github.com/cyperpro20/reachback', screenshot: 'https://s0.wp.com/mshots/v1/https%3A%2F%2Freachback.online?w=800&h=500' },
+];
+
+const contactItems = [
+  { label: 'Email', value: 'Prolificdevinnovations@gmail.com', href: 'mailto:Prolificdevinnovations@gmail.com' },
+  { label: 'WhatsApp', value: '+234 813 378 7926', href: 'https://wa.me/2348133787926' },
+  { label: 'GitHub', value: 'github.com/ProlificDev', href: 'https://github.com/ProlificDev' },
+  { label: 'LinkedIn', value: 'linkedin.com/in/ifechukwu-awuzie', href: 'https://www.linkedin.com/in/ifechukwu-awuzie-0289632b9' },
+];
+
+const SpaceHero = () => (
+  <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#e6e6e6] pt-10" id="home">
+    
+    {/* Dynamic SVG Blob Background */}
+    <div className="absolute top-[20%] left-[-10%] right-[-10%] bottom-[-20%] z-0 pointer-events-none">
+      <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMax slice" className="w-full h-full text-[#111] drop-shadow-[0_-20px_40px_rgba(0,0,0,0.15)]">
+        <path fill="currentColor" d="M0,300 C150,150 250,400 450,200 C600,50 750,250 1000,150 L1000,800 L0,800 Z" />
+        <path fill="currentColor" d="M0,600 C200,450 350,700 550,500 C700,350 850,550 1000,450 L1000,800 L0,800 Z" className="opacity-90" />
+      </svg>
+    </div>
+
+    {/* Starry texture inside blob using CSS */}
+    <div className="absolute top-[25%] left-0 right-0 bottom-0 z-0 opacity-50 pointer-events-none" style={{
+      backgroundImage: 'radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px), radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px)',
+      backgroundSize: '350px 350px, 200px 200px',
+      backgroundPosition: '0 0, 40px 60px'
+    }}></div>
+
+    {/* Floating Retro Illustrations (Placeholders mapped to the image layout) */}
+    {/* Alien (Left) */}
+    <div className="absolute left-[5%] top-[45%] w-20 h-32 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-[1.5]">
+      <span className="text-7xl">👽</span>
+    </div>
+    
+    {/* Moon (Bottom Left) */}
+    <div className="absolute left-[15%] bottom-[10%] w-24 h-24 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '1s' }}>
+      <span className="text-[100px]">🌑</span>
+    </div>
+    
+    {/* UFO (Bottom Center) */}
+    <div className="absolute left-[40%] bottom-[5%] w-32 h-20 animate-float-slow z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '2s' }}>
+      <span className="text-[120px]">🛸</span>
+    </div>
+
+    {/* Telescope (Bottom Right) */}
+    <div className="absolute right-[25%] bottom-[5%] w-24 h-32 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '0.5s' }}>
+      <span className="text-7xl">🔭</span>
+    </div>
+
+    {/* Astronaut (Right) */}
+    <div className="absolute right-[5%] top-[55%] w-40 h-40 animate-float-slow z-10 hidden md:flex items-center justify-center grayscale contrast-125">
+      <span className="text-[140px]">👨‍🚀</span>
+    </div>
+
+    {/* Saturn (Top Right) */}
+    <div className="absolute right-[15%] top-[25%] w-32 h-32 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '1.5s' }}>
+      <span className="text-[130px]">🪐</span>
+    </div>
+
+    {/* Main Text Content inside the blob */}
+    <div className="relative z-20 text-center max-w-4xl mx-auto px-6 mt-16 md:mt-32">
+      <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+          Ifechukwu Awuzie:<br/>Full Stack Developer
+        </h1>
+        <p className="font-sans text-sm md:text-base text-white/90 max-w-3xl mx-auto leading-relaxed">
+          It WAS gone almost as soon as it came, so it is hardly surprising that we didn't even notice it. 
+          Only in 2026, four years after the event, did clients start realising the sheer velocity at which robust, 
+          scalable applications could be built. Scouring the codebase, they noticed a burst of elegant logic and 
+          perfect UI with unimaginable ferocity. Lasting less than a few sprints, it hit production, releasing 
+          roughly as much value as an entire engineering team spits out over five years.
+        </p>
+      </motion.div>
+    </div>
+  </div>
+);
+
+const Home = () => {
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [sent, setSent] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const visibleProjects = showAll ? projects : projects.slice(0, 2);
+
+  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const rawPhone = form.phone.replace(/[\s\-()]/g, '');
+    const text = `Hi Ifechukwu!%0A%0AName: ${encodeURIComponent(form.name)}%0AEmail: ${encodeURIComponent(form.email)}%0APhone: ${encodeURIComponent(form.phone)}%0A%0AMessage:%0A${encodeURIComponent(form.message)}`;
+    window.open(`https://wa.me/2348133787926?text=${text}`, '_blank');
+    setSent(true);
+    setForm({ name: '', email: '', phone: '', message: '' });
+    setTimeout(() => setSent(false), 4000);
+  };
 
   return (
-    <div className={`${bg} transition-colors duration-300`}>
-
-      {/* ══ HERO ══ */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-5 pt-24 pb-12 overflow-hidden">
-
-        {/* Animated background orbs */}
-        <div className="hero-bg">
-          <div className="orb orb-1" />
-          <div className="orb orb-2" />
-          <div className="orb orb-3" />
-        </div>
-
-        {/* Content wrapper — keeps max-width constraint */}
-        <div className="relative z-10 max-w-3xl mx-auto w-full flex flex-col items-center">
-
-        {/* Profile Avatar */}
-        <div className="mb-6 animate-slide-up-fade-1">
-          <img
-            src="/favicon.png"
-            alt="ProlificDev Logo"
-            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white/10 shadow-[0_0_24px_rgba(0,102,255,0.4)]"
-          />
-        </div>
-
-        {/* Status badge */}
-        <div className="mb-6 animate-slide-up-fade-1">
-          <span className={`
-            inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-mono tracking-widest uppercase border
-            ${isDarkMode ? 'border-white/10 text-white/40' : 'border-black/10 text-black/40'}
-          `}>
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            Available for work · Worldwide
-          </span>
-        </div>
-
-        {/* Greeting */}
-        <div className="mb-2 animate-slide-up-fade-2">
-          <p className={`text-sm md:text-base font-mono ${muted}`}>
-            Ifechukwu Awuzie · aka <span className="text-blue-500 font-semibold">ProlificDev</span>
-          </p>
-        </div>
-
-        {/* Big name + word cycler */}
-        <div className="animate-slide-up-fade-3 w-full text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-tight tracking-tight mb-2">
-            Ifechukwu Awuzie
-          </h1>
-          <div className="flex items-center justify-center min-h-[1.2em]">
-            <WordCycler isDarkMode={isDarkMode} />
+    <div className="bg-[#111] text-white min-h-screen font-sans">
+      <SpaceHero />
+      
+      {/* ── ABOUT ── */}
+      <section className="py-24 px-6 max-w-4xl mx-auto bg-[#111] relative z-10" id="about">
+        <h2 className="font-display text-4xl md:text-5xl mb-12 text-center">Beyond the Event Horizon</h2>
+        <div className="grid md:grid-cols-2 gap-12 font-sans text-sm md:text-base leading-relaxed text-white/80">
+          <div>
+            <p className="mb-6">Just as the universe expanded from a singularity, my journey started with an obsession for systems and physics. Before writing code, I visualized energy flow. Now, I architect scalable web applications.</p>
+            <p>I'm <strong className="text-white">Ifechukwu Awuzie</strong>, building production-ready products for over 4 years. From React and Node.js to database orchestration, I handle everything end-to-end.</p>
+          </div>
+          <div className="border-l-2 border-white/20 pl-8">
+            <p className="italic mb-4 text-lg text-white">"If you want to find the secrets of the universe, think in terms of energy, frequency and vibration."</p>
+            <p className="font-sans text-xs tracking-widest uppercase mt-4 text-white/50">— Nikola Tesla</p>
           </div>
         </div>
-
-        {/* Sub-line */}
-        <p className={`text-sm md:text-base max-w-md leading-relaxed mt-6 mb-8 animate-slide-up-fade-4 ${muted}`}>
-          I'm <span className={strong}>Ifechukwu Awuzie</span> — a full stack developer
-          with <span className={strong}>4 years</span> of professional experience
-          designing and building high-performance web applications, end to end. I go by{' '}
-          <span className="text-blue-500 font-semibold">ProlificDev</span> — a name
-          that reflects my commitment to shipping quality work, consistently.
-        </p>
-
-        {/* CTA buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 items-center justify-center w-full animate-slide-up-fade-5">
-          <Link
-            to="/works"
-            className="w-full sm:w-auto px-6 py-2.5 bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold rounded-full transition-all duration-200 hover:shadow-[0_0_24px_rgba(0,102,255,0.4)]"
-          >
-            View my work ↗
-          </Link>
-          <Link
-            to="/contact"
-            className={`w-full sm:w-auto px-6 py-2.5 text-sm font-semibold rounded-full border transition-all duration-200 ${
-              isDarkMode
-                ? 'border-white/20 text-white/70 hover:border-white/50 hover:text-white'
-                : 'border-black/20 text-black/70 hover:border-black/50 hover:text-black'
-            }`}
-          >
-            Get in touch
-          </Link>
-          <a
-            href="/Ifechukwu_Awuzie_CV.pdf"
-            download
-            className={`w-full sm:w-auto px-6 py-2.5 text-sm font-semibold rounded-full border transition-all duration-200 inline-flex items-center justify-center gap-2 ${
-              isDarkMode
-                ? 'border-white/20 text-white/70 hover:border-white/50 hover:text-white'
-                : 'border-black/20 text-black/70 hover:border-black/50 hover:text-black'
-            }`}
-          >
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" />
-            </svg>
-            Download CV
-          </a>
-        </div>
-
-        {/* Scroll hint */}
-        <div className={`mt-14 flex items-center justify-center gap-3 animate-slide-up-fade-5 ${muted}`}>
-          <div className={`w-8 h-px ${isDarkMode ? 'bg-white/20' : 'bg-black/20'}`} />
-          <span className="text-[10px] font-mono tracking-widest uppercase">Scroll to explore</span>
-          <div className={`w-8 h-px ${isDarkMode ? 'bg-white/20' : 'bg-black/20'}`} />
-        </div>
-        </div>{/* end content wrapper */}
       </section>
 
-      {/* ══ STATS ══ */}
-      <section className={`border-y ${border} py-8 px-4`}>
-        <div className={`max-w-3xl mx-auto grid grid-cols-3 divide-x ${border}`}>
-          {stats.map(({ value, label }) => (
-            <div key={label} className="px-3 sm:px-6 first:pl-0 last:pr-0 text-center">
-              <p className="text-2xl sm:text-4xl font-black text-blue-500 mb-1">{value}</p>
-              <p className={`text-[10px] sm:text-xs font-mono tracking-widest uppercase ${muted}`}>{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ── EXPERIENCE ── */}
+      <section className="py-24 px-6 bg-[#f4f4f4] text-[#111] rounded-t-[60px]" id="experience">
+        <div className="max-w-5xl mx-auto">
+          <FadeUp>
+            <p className="font-sans text-sm font-bold tracking-[0.3em] uppercase mb-4 text-center opacity-60">Career</p>
+            <h2 className="font-display text-4xl md:text-5xl mb-16 text-center">Work Experience</h2>
+          </FadeUp>
 
-      {/* ══ ABOUT ══ */}
-      <section className="py-16 px-5 max-w-2xl mx-auto text-center">
-        <p className={`text-[10px] font-mono tracking-widest uppercase mb-4 ${muted}`}>About</p>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight mb-8">
-          Turning ideas into{' '}
-          <span className="text-blue-500">polished products.</span>
-        </h2>
-        <div className={`space-y-4 text-sm leading-relaxed ${muted}`}>
-          <p>
-            I'm <span className={strong}>Ifechukwu Awuzie</span>, a full stack developer
-            known professionally as <span className="text-blue-500 font-semibold">ProlificDev</span>.
-            Over the past 4 years, I've built and shipped production-ready web applications
-            for real clients — from e-commerce platforms to SaaS products, handling everything
-            from database to UI.
-          </p>
-          <p>
-            My stack spans <span className={strong}>React, Node.js, Express, and MongoDB</span> on the
-            backend, paired with a sharp eye for UI design and a relentless focus on performance.
-            I don't just write code — I architect full products that feel intuitive, look great, and scale.
-          </p>
-          <p>
-            I work remotely and collaborate with clients and teams across the globe.
-            Whether you need a full product built from scratch or an existing codebase
-            improved, I bring professionalism, clear communication, and clean code to every project.
-          </p>
-        </div>
-      </section>
-
-      {/* ══ EXPERIENCE ══ */}
-      <section className={`border-t ${border} py-16 px-5`}>
-        <div className="max-w-2xl mx-auto">
-          <p className={`text-[10px] font-mono tracking-widest uppercase mb-8 text-center ${muted}`}>Work Experience</p>
-
-          {/* FomOwl */}
-          <div className={`rounded-2xl p-6 sm:p-8 border relative overflow-hidden mb-4 ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-black/[0.02] border-black/10'}`}>
-            <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 rounded-l-2xl" />
-            <div className="pl-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+          {/* Role 1 - Fomowl (Current) */}
+          <FadeUp delay={0.1}>
+            <div className="border-2 border-[#111] rounded-3xl p-8 md:p-12 shadow-[4px_4px_0px_#111] mb-8">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
                 <div>
-                  <h3 className={`text-lg font-black ${isDarkMode ? 'text-white' : 'text-black'}`}>Full Stack Developer</h3>
-                  <p className="text-blue-500 font-semibold text-sm">FomOwl</p>
+                  <h3 className="font-display text-2xl md:text-3xl mb-1">Intern Full Stack Developer</h3>
+                  <p className="font-sans text-sm font-bold tracking-widest uppercase opacity-60">Fomowl · Fintech</p>
                 </div>
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase border self-start sm:self-auto
-                  ${isDarkMode ? 'border-green-500/30 bg-green-500/10 text-green-400' : 'border-green-500/30 bg-green-50 text-green-600'}`}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  July 2026 — Present
-                </span>
+                <span className="font-sans text-xs font-bold tracking-widest uppercase bg-[#111] text-white px-4 py-2 rounded-full whitespace-nowrap self-start">July 2026 – Present</span>
               </div>
-              <ul className={`space-y-3 text-sm leading-relaxed ${muted}`}>
-                {[
-                  'Architect and build scalable full stack web applications from database schema to pixel-perfect UI.',
-                  'Design and develop RESTful APIs using Node.js and Express, consumed by React frontends.',
-                  'Manage and optimise MongoDB and SQL databases for performance and reliability.',
-                  'Implement authentication systems, role-based access control, and security best practices.',
-                  'Collaborate with cross-functional teams to ship features on tight deadlines.',
-                  'Write clean, maintainable code with a focus on performance, scalability, and developer experience.',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
-                    <span className="w-1 h-1 rounded-full bg-blue-500 shrink-0 mt-2" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {['React', 'Node.js', 'Express', 'MongoDB', 'REST APIs', 'Tailwind CSS', 'Git'].map((tech) => (
-                  <span key={tech} className={`px-3 py-1 rounded-full text-xs font-semibold ${isDarkMode ? 'bg-white/10 text-white/70' : 'bg-black/8 text-black/70'}`}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Codex Inc Enterprise */}
-          <div className={`rounded-2xl p-6 sm:p-8 border relative overflow-hidden ${isDarkMode ? 'bg-white/5 border-white/10' : 'bg-black/[0.02] border-black/10'}`}>
-            <div className="absolute top-0 left-0 w-1 h-full bg-purple-500 rounded-l-2xl" />
-            <div className="pl-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-                <div>
-                  <h3 className={`text-lg font-black ${isDarkMode ? 'text-white' : 'text-black'}`}>Tech Lead <span className={`text-sm font-medium ${muted}`}>(Architect)</span></h3>
-                  <p className="text-purple-400 font-semibold text-sm">Codex Inc Enterprise</p>
-                </div>
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase border self-start sm:self-auto
-                  ${isDarkMode ? 'border-green-500/30 bg-green-500/10 text-green-400' : 'border-green-500/30 bg-green-50 text-green-600'}`}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  June 2026 — Present
-                </span>
-              </div>
-              <ul className={`space-y-3 text-sm leading-relaxed ${muted}`}>
-                {[
-                  'Lead the technical vision and architecture of all engineering projects across the organisation.',
-                  'Define system design patterns, tech stack decisions, and development standards for the team.',
-                  'Mentor junior and mid-level developers, conducting code reviews and driving engineering best practices.',
-                  'Oversee full stack development lifecycle — from requirements gathering to production deployment.',
-                  'Bridge the gap between business requirements and technical execution with clear architectural plans.',
-                  'Drive performance optimisation, security hardening, and scalability across all company platforms.',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
-                    <span className="w-1 h-1 rounded-full bg-purple-500 shrink-0 mt-2" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {['System Architecture', 'React', 'Node.js', 'MongoDB', 'Team Leadership', 'Code Review', 'DevOps'].map((tech) => (
-                  <span key={tech} className={`px-3 py-1 rounded-full text-xs font-semibold ${isDarkMode ? 'bg-white/10 text-white/70' : 'bg-black/8 text-black/70'}`}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══ TESLA / ORIGIN STORY ══ */}
-      <section className={`border-t ${border} py-16 px-5`}>
-        <div className="max-w-2xl mx-auto">
-
-          {/* Header */}
-          <div className="text-center mb-12 flex flex-col items-center">
-            <img
-              src="/favicon.png"
-              alt="ProlificDev Logo"
-              className="w-16 h-16 sm:w-20 sm:h-20 mb-6 rounded-full object-cover border-2 border-blue-500/30 shadow-[0_0_16px_rgba(0,102,255,0.2)]"
-            />
-            <p className={`text-[10px] font-mono tracking-widest uppercase mb-4 ${muted}`}>The Mind Behind the Code</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight">
-              Wired differently.{' '}
-              <span className="text-blue-500">By design.</span>
-            </h2>
-          </div>
-
-          {/* Tesla quote card */}
-          <div className={`rounded-2xl p-6 sm:p-8 mb-10 relative overflow-hidden ${
-            isDarkMode ? 'bg-white/5 border border-white/10' : 'bg-black/[0.03] border border-black/10'
-          }`}>
-            {/* Big decorative quote mark */}
-            <span className="absolute top-4 left-5 text-7xl font-black text-blue-500 opacity-10 leading-none select-none">"</span>
-            <blockquote className="relative z-10 text-center">
-              <p className={`text-base sm:text-lg font-medium leading-relaxed italic mb-4 ${isDarkMode ? 'text-white/80' : 'text-black/80'}`}>
-                "If you want to find the secrets of the universe, think in terms of energy, frequency and vibration."
+              <p className="font-sans text-sm leading-relaxed text-[#111]/70 mb-6">
+                Fomowl is a fintech company building a non-custodian crypto wallet — giving users full sovereignty over their digital assets without third-party control.
               </p>
-              <footer className={`text-xs font-mono tracking-widest uppercase ${muted}`}>
-                — Nikola Tesla · Inventor, Physicist, Visionary
-              </footer>
-            </blockquote>
-          </div>
+              <ul className="space-y-4 font-sans text-sm leading-relaxed text-[#111]/80">
+                {[
+                  'Contributing to the development of a non-custodian crypto wallet with a focus on secure, user-friendly interfaces.',
+                  'Working across the full stack — from React-based frontend flows to backend API integrations and blockchain interactions.',
+                  'Collaborating with the product team to implement wallet features including transaction history, asset management, and onboarding flows.',
+                  'Gaining hands-on experience with Web3 tooling including Ethers.js within a professional fintech environment.',
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="mt-1.5 w-2 h-2 rounded-full bg-[#111] flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeUp>
 
-          {/* Story paragraphs */}
-          <div className={`space-y-5 text-sm leading-relaxed ${muted}`}>
-            <p>
-              Before Ifechukwu ever wrote a line of code, he was obsessed with something else entirely —
-              the invisible forces that govern reality. <span className={strong}>Physics and mathematics</span> weren't
-              just school subjects. They were puzzles that kept him up at night, the same way a stubborn
-              bug does today.
-            </p>
-            <p>
-              His mentor? <span className={strong}>Nikola Tesla</span> — a man who didn't just think about electricity,
-              he <em>felt</em> it. Tesla could visualise entire machines in his mind before touching a single
-              component. That obsession with mental models, with understanding systems at their core before
-              building them, is something Ifechukwu carries into every project.
-            </p>
-            <p>
-              When Ifechukwu looks at a UI, he doesn't just see buttons and divs. He sees{' '}
-              <span className={strong}>systems of energy</span> — state flowing through components like current
-              through a circuit, server responses travelling like signals across a network, animations
-              obeying the same laws as oscillating waves.
-            </p>
-            <p>
-              Tesla once said the present is theirs, but the future belongs to those who build it.
-              Ifechukwu builds for the future — full stack, end to end.
-            </p>
-          </div>
-
-          {/* Fun facts row */}
-          <div className={`mt-10 grid grid-cols-3 gap-px ${isDarkMode ? 'bg-white/10' : 'bg-black/10'}`}>
-            {[
-              { icon: '⚡', label: 'Tesla fan', sub: 'since age 14' },
-              { icon: '∑', label: 'Maths lover', sub: 'calculus to logic' },
-              { icon: '🌊', label: 'Physics mind', sub: 'waves & systems' },
-            ].map(({ icon, label, sub }) => (
-              <div key={label} className={`${cardBg} p-4 text-center`}>
-                <div className="text-2xl mb-2">{icon}</div>
-                <p className={`text-xs font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-black'}`}>{label}</p>
-                <p className={`text-[10px] font-mono ${muted}`}>{sub}</p>
+          {/* Role 2 - Freelance */}
+          <FadeUp delay={0.15}>
+            <div className="border-2 border-[#111] rounded-3xl p-8 md:p-12 shadow-[4px_4px_0px_#111] mb-12">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
+                <div>
+                  <h3 className="font-display text-2xl md:text-3xl mb-1">Freelance Full Stack Developer</h3>
+                  <p className="font-sans text-sm font-bold tracking-widest uppercase opacity-60">Self-Employed · Nigeria</p>
+                </div>
+                <span className="font-sans text-xs font-bold tracking-widest uppercase bg-[#111] text-white px-4 py-2 rounded-full whitespace-nowrap self-start">Mar 2023 – Present</span>
               </div>
-            ))}
-          </div>
+              <ul className="space-y-4 font-sans text-sm leading-relaxed text-[#111]/80">
+                {[
+                  'Architect and scale modern web applications and client business solutions using React.js and Node.js.',
+                  'Translate custom business requirements and creative briefs into highly responsive, mobile-first user interfaces.',
+                  'Optimize frontend-backend communication and integrate secure APIs, reducing layout latency and improving cross-device performance.',
+                  'Manage end-to-end project lifecycles independently, delivering clean, maintainable codebases to client specifications.',
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="mt-1.5 w-2 h-2 rounded-full bg-[#111] flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeUp>
 
+          {/* Skills Grid */}
+          <FadeUp delay={0.2}>
+            <h3 className="font-display text-2xl mb-8 text-center">Technical Skills</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { label: 'Frontend', skills: ['React.js', 'Next.js', 'JavaScript', 'TypeScript', 'HTML5 / CSS3', 'Tailwind CSS', 'Responsive UI/UX'] },
+                { label: 'Backend & Data', skills: ['Node.js', 'Express.js', 'RESTful APIs', 'Firebase', 'JWT / OAuth', 'API Integration'] },
+                { label: 'Tools & DevOps', skills: ['Git & GitHub', 'Netlify / Vercel', 'Postman', 'VS Code', 'Web3 (Solidity, Ethers.js)'] },
+              ].map(({ label, skills }) => (
+                <div key={label} className="border-2 border-[#111] rounded-2xl p-6 shadow-[3px_3px_0px_#111]">
+                  <h4 className="font-display text-lg mb-4">{label}</h4>
+                  <ul className="space-y-2">
+                    {skills.map(s => (
+                      <li key={s} className="font-sans text-xs font-bold tracking-wider uppercase border-b border-[#111]/15 pb-2 last:border-0 last:pb-0">{s}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
+
+          {/* Education */}
+          <FadeUp delay={0.3}>
+            <div className="mt-12 border-2 border-[#111] rounded-3xl p-8 shadow-[4px_4px_0px_#111]">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <div>
+                  <h3 className="font-display text-2xl mb-1">Full Stack Web Development</h3>
+                  <p className="font-sans text-sm font-bold tracking-widest uppercase opacity-60">Udemy & FreeCodeCamp</p>
+                </div>
+                <span className="font-sans text-xs font-bold tracking-widest uppercase bg-[#111] text-white px-4 py-2 rounded-full whitespace-nowrap self-start">2022 – Present</span>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {['Responsive Web Design', 'JS Algorithms & Data Structures', 'Frontend Libraries (React)', 'Backend & APIs (Node.js)'].map(cert => (
+                  <div key={cert} className="bg-[#111]/5 border border-[#111]/20 rounded-xl px-4 py-3 font-sans text-xs font-bold tracking-wider uppercase text-center">
+                    {cert}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ══ SKILLS ══ */}
-      <section className={`border-t ${border} py-16 px-5`}>
-        <div className="max-w-3xl mx-auto">
-          <p className={`text-[10px] font-mono tracking-widest uppercase mb-8 text-center ${muted}`}>Skills & Technologies</p>
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-px ${isDarkMode ? 'bg-white/10' : 'bg-black/10'}`}>
-            {skills.map(({ category, items }) => (
-              <div key={category} className={`${cardBg} p-4 sm:p-6 text-center`}>
-                <h3 className="text-xs font-bold text-blue-500 mb-4 tracking-wide">{category}</h3>
-                <ul className="space-y-2">
-                  {items.map((item) => (
-                    <li key={item} className={`text-xs sm:text-sm ${muted}`}>{item}</li>
-                  ))}
-                </ul>
-              </div>
+      {/* ── WORKS ── */}
+      <section className="py-24 px-6 bg-[#f4f4f4] text-[#111] relative rounded-t-[60px]" id="works">
+        <div className="max-w-6xl mx-auto">
+          <FadeUp>
+            <h2 className="font-display text-4xl md:text-5xl mb-16 text-center">Stellar Projects</h2>
+          </FadeUp>
+          
+          <div className="grid md:grid-cols-2 gap-10">
+            {visibleProjects.map((p, i) => (
+              <FadeUp key={p.id} delay={i * 0.1}>
+                <div className="group border-2 border-[#111] p-8 rounded-3xl hover:bg-white transition-colors duration-300 relative overflow-hidden bg-transparent shadow-[4px_4px_0px_#111]">
+                  <div className="mb-6 overflow-hidden rounded-xl aspect-video border-2 border-[#111]">
+                    <img src={p.screenshot} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0" />
+                  </div>
+                  <h3 className="font-display text-2xl mb-2">{p.index} - {p.title}</h3>
+                  <p className="font-sans text-xs tracking-[0.2em] uppercase opacity-70 mb-4">{p.category}</p>
+                  <p className="font-sans text-sm opacity-80 mb-6">{p.description}</p>
+                  <div className="flex gap-4 font-sans font-bold tracking-widest uppercase text-xs">
+                    <a href={p.link} target="_blank" rel="noreferrer" className="bg-[#111] text-white px-6 py-2 rounded-full hover:scale-105 transition-transform">Launch ↗</a>
+                    <a href={p.github} target="_blank" rel="noreferrer" className="border-2 border-[#111] px-6 py-2 rounded-full hover:bg-gray-100 transition-colors">Code ↗</a>
+                  </div>
+                </div>
+              </FadeUp>
             ))}
           </div>
+
+          {/* See All / Show Less toggle */}
+          {projects.length > 2 && (
+            <div className="mt-12 text-center">
+              <button
+                onClick={() => setShowAll(prev => !prev)}
+                className="inline-flex items-center gap-2 border-2 border-[#111] font-sans font-bold tracking-widest uppercase text-xs px-8 py-3 rounded-full shadow-[3px_3px_0px_#111] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 bg-transparent text-[#111]"
+              >
+                {showAll ? 'Show Less ↑' : `See All Projects (${projects.length - 2} more) ↓`}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* ══ FEATURED PROJECT ══ */}
-      <section className={`border-t ${border} py-16 px-5`}>
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <p className={`text-[10px] font-mono tracking-widest uppercase mb-1 ${muted}`}>Featured Work</p>
-              <h2 className="text-xl sm:text-2xl font-black">Latest project.</h2>
-            </div>
-            <Link
-              to="/works"
-              className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all duration-200 ${
-                isDarkMode
-                  ? 'border-white/20 text-white/60 hover:border-white/50 hover:text-white'
-                  : 'border-black/20 text-black/60 hover:border-black/50 hover:text-black'
-              }`}
-            >
-              View all ↗
-            </Link>
-          </div>
+      {/* ── CONTACT ── */}
+      <section className="py-24 px-6 max-w-4xl mx-auto bg-[#111] text-white" id="contact">
+        <FadeUp>
+          <h2 className="font-display text-4xl md:text-5xl mb-16 text-center">Establish Contact</h2>
+        </FadeUp>
 
-          {/* Featured card — NumShift */}
-          <a
-            href="https://numshift.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`group block rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,102,255,0.15)] ${
-              isDarkMode ? 'border-white/10 hover:border-blue-500/30' : 'border-black/10 hover:border-blue-500/30'
-            }`}
-          >
-            {/* Screenshot */}
-            <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
-              <img
-                src="/images/numshift.jpg"
-                alt="NumShift screenshot"
-                className="relative w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 flex gap-2">
-                <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-full bg-blue-500/90 text-white">SaaS</span>
-              </div>
+        <div className="grid md:grid-cols-2 gap-16">
+          <FadeUp delay={0.1}>
+            <div className="space-y-6">
+              <h3 className="font-display text-2xl mb-6">Coordinates</h3>
+              {contactItems.map(item => (
+                <div key={item.label} className="border-b border-white/20 pb-4">
+                  <p className="font-sans text-xs tracking-widest uppercase opacity-50 mb-1">{item.label}</p>
+                  <a href={item.href} target="_blank" rel="noreferrer" className="font-sans text-lg hover:text-gray-300 transition-colors">
+                    {item.value} ↗
+                  </a>
+                </div>
+              ))}
             </div>
+          </FadeUp>
 
-            {/* Info */}
-            <div className={`p-5 flex items-center justify-between ${isDarkMode ? 'bg-white/5' : 'bg-black/[0.02]'}`}>
+          <FadeUp delay={0.2}>
+            <form onSubmit={handleSubmit} className="space-y-6 font-sans">
+              <h3 className="font-display text-2xl mb-6">Send Signal</h3>
               <div>
-                <h3 className="font-black text-lg mb-0.5">NumShift</h3>
-                <p className={`text-xs ${muted}`}>WhatsApp account recovery · Bulk SMS · Voice note verification</p>
+                <label className="block text-xs tracking-widest uppercase opacity-70 mb-2">Name</label>
+                <input type="text" name="name" value={form.name} onChange={handleChange} required className="w-full bg-transparent border-b-2 border-white/50 py-2 outline-none focus:border-white font-sans text-lg" />
               </div>
-              <span className={`text-xs font-semibold shrink-0 ml-4 transition-transform duration-200 group-hover:translate-x-1 ${isDarkMode ? 'text-white/40' : 'text-black/40'}`}>↗</span>
-            </div>
-          </a>
-
-          {/* View more button */}
-          <div className="mt-6 text-center">
-            <Link
-              to="/works"
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-blue-500 hover:bg-blue-400 text-white text-sm font-semibold rounded-full transition-all duration-200 hover:shadow-[0_0_24px_rgba(0,102,255,0.4)]"
-            >
-              View all projects
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ══ CTA BANNER ══ */}
-      <section className="py-16 px-5">
-        <div className="max-w-3xl mx-auto">
-          <div className={`rounded-2xl p-8 sm:p-12 flex flex-col items-center text-center gap-6 ${
-            isDarkMode
-              ? 'bg-blue-500/10 border border-blue-500/20'
-              : 'bg-blue-50 border border-blue-100'
-          }`}>
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-black mb-2">Let's build something great.</h2>
-              <p className={`text-sm ${muted}`}>
-                Have a project in mind? I'm <span className={strong}>Ifechukwu Awuzie</span> — and I'm ready to bring it to life.
-              </p>
-            </div>
-            <Link
-              to="/contact"
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-[0_0_32px_rgba(0,102,255,0.4)] text-sm"
-            >
-              Start a conversation →
-            </Link>
-          </div>
+              <div>
+                <label className="block text-xs tracking-widest uppercase opacity-70 mb-2">Email</label>
+                <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full bg-transparent border-b-2 border-white/50 py-2 outline-none focus:border-white font-sans text-lg" />
+              </div>
+              <div>
+                <label className="block text-xs tracking-widest uppercase opacity-70 mb-2">WhatsApp</label>
+                <input type="tel" name="phone" value={form.phone} onChange={handleChange} required className="w-full bg-transparent border-b-2 border-white/50 py-2 outline-none focus:border-white font-sans text-lg" />
+              </div>
+              <div>
+                <label className="block text-xs tracking-widest uppercase opacity-70 mb-2">Message</label>
+                <textarea name="message" value={form.message} onChange={handleChange} required rows={4} className="w-full bg-transparent border-b-2 border-white/50 py-2 outline-none focus:border-white font-sans text-lg resize-none"></textarea>
+              </div>
+              <button type="submit" className="w-full bg-white text-[#111] font-bold tracking-widest uppercase py-4 hover:scale-[1.02] transition-transform duration-300 rounded-full">
+              Transmit via WhatsApp
+              </button>
+              {sent && <p className="text-center font-bold tracking-widest text-sm mt-4 text-green-400">✓ Signal prepared!</p>}
+            </form>
+          </FadeUp>
         </div>
       </section>
 
