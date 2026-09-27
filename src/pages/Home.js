@@ -1,5 +1,21 @@
 import React, { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+
+// --- ANIMATION VARIANTS ---
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1], delay } }),
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+};
 
 // --- SHARED COMPONENTS ---
 const FadeUp = ({ children, delay = 0, className = '' }) => {
@@ -9,14 +25,48 @@ const FadeUp = ({ children, delay = 0, className = '' }) => {
     <motion.div
       ref={ref}
       className={className}
-      initial={{ opacity: 0, y: 32 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
+      variants={fadeUpVariants}
+      initial="hidden"
+      animate={inView ? 'visible' : 'hidden'}
+      custom={delay}
     >
       {children}
     </motion.div>
   );
 };
+
+const StaggerSection = ({ children, className = '' }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      variants={staggerContainer}
+      initial="hidden"
+      animate={inView ? 'visible' : 'hidden'}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const StaggerItem = ({ children, className = '' }) => (
+  <motion.div className={className} variants={staggerItem}>
+    {children}
+  </motion.div>
+);
+
+// Hover-lift card wrapper
+const HoverCard = ({ children, className = '' }) => (
+  <motion.div
+    className={className}
+    whileHover={{ y: -6, boxShadow: '6px 6px 0px #111' }}
+    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+  >
+    {children}
+  </motion.div>
+);
 
 // --- DATA ---
 const projects = [
@@ -146,7 +196,7 @@ const Home = () => {
 
           {/* Role 1 - Fomowl (Current) */}
           <FadeUp delay={0.1}>
-            <div className="border-2 border-[#111] rounded-3xl p-8 md:p-12 shadow-[4px_4px_0px_#111] mb-8">
+            <HoverCard className="border-2 border-[#111] rounded-3xl p-8 md:p-12 shadow-[4px_4px_0px_#111] mb-8 bg-white/50 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
                 <div>
                   <h3 className="font-display text-2xl md:text-3xl mb-1">Intern Full Stack Developer</h3>
@@ -170,12 +220,12 @@ const Home = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </HoverCard>
           </FadeUp>
 
           {/* Role 2 - Freelance */}
           <FadeUp delay={0.15}>
-            <div className="border-2 border-[#111] rounded-3xl p-8 md:p-12 shadow-[4px_4px_0px_#111] mb-12">
+            <HoverCard className="border-2 border-[#111] rounded-3xl p-8 md:p-12 shadow-[4px_4px_0px_#111] mb-12 bg-white/50 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
                 <div>
                   <h3 className="font-display text-2xl md:text-3xl mb-1">Freelance Full Stack Developer</h3>
@@ -196,7 +246,7 @@ const Home = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </HoverCard>
           </FadeUp>
 
           {/* Skills Grid */}
@@ -208,21 +258,21 @@ const Home = () => {
                 { label: 'Backend & Data', skills: ['Node.js', 'Express.js', 'RESTful APIs', 'Firebase', 'JWT / OAuth', 'API Integration'] },
                 { label: 'Tools & DevOps', skills: ['Git & GitHub', 'Netlify / Vercel', 'Postman', 'VS Code', 'Web3 (Solidity, Ethers.js)'] },
               ].map(({ label, skills }) => (
-                <div key={label} className="border-2 border-[#111] rounded-2xl p-6 shadow-[3px_3px_0px_#111]">
+                <HoverCard key={label} className="border-2 border-[#111] rounded-2xl p-6 shadow-[3px_3px_0px_#111] bg-white/50 backdrop-blur-sm">
                   <h4 className="font-display text-lg mb-4">{label}</h4>
                   <ul className="space-y-2">
                     {skills.map(s => (
                       <li key={s} className="font-sans text-xs font-bold tracking-wider uppercase border-b border-[#111]/15 pb-2 last:border-0 last:pb-0">{s}</li>
                     ))}
                   </ul>
-                </div>
+                </HoverCard>
               ))}
             </div>
           </FadeUp>
 
           {/* Education */}
           <FadeUp delay={0.3}>
-            <div className="mt-12 border-2 border-[#111] rounded-3xl p-8 shadow-[4px_4px_0px_#111]">
+            <HoverCard className="mt-12 border-2 border-[#111] rounded-3xl p-8 shadow-[4px_4px_0px_#111] bg-white/50 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <div>
                   <h3 className="font-display text-2xl mb-1">Full Stack Web Development</h3>
@@ -232,12 +282,12 @@ const Home = () => {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {['Responsive Web Design', 'JS Algorithms & Data Structures', 'Frontend Libraries (React)', 'Backend & APIs (Node.js)'].map(cert => (
-                  <div key={cert} className="bg-[#111]/5 border border-[#111]/20 rounded-xl px-4 py-3 font-sans text-xs font-bold tracking-wider uppercase text-center">
+                  <HoverCard key={cert} className="bg-white border border-[#111]/20 rounded-xl px-4 py-3 font-sans text-xs font-bold tracking-wider uppercase text-center shadow-sm">
                     {cert}
-                  </div>
+                  </HoverCard>
                 ))}
               </div>
-            </div>
+            </HoverCard>
           </FadeUp>
         </div>
       </section>
@@ -249,10 +299,10 @@ const Home = () => {
             <h2 className="font-display text-4xl md:text-5xl mb-16 text-center">Stellar Projects</h2>
           </FadeUp>
           
-          <div className="grid md:grid-cols-2 gap-10">
+          <StaggerSection className="grid md:grid-cols-2 gap-10">
             {visibleProjects.map((p, i) => (
-              <FadeUp key={p.id} delay={i * 0.1}>
-                <div className="group border-2 border-[#111] p-8 rounded-3xl hover:bg-white transition-colors duration-300 relative overflow-hidden bg-transparent shadow-[4px_4px_0px_#111]">
+              <StaggerItem key={p.id}>
+                <HoverCard className="group border-2 border-[#111] p-8 rounded-3xl bg-white/50 backdrop-blur-sm relative overflow-hidden shadow-[4px_4px_0px_#111]">
                   <div className="mb-6 overflow-hidden rounded-xl aspect-video border-2 border-[#111]">
                     <img src={p.screenshot} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0" />
                   </div>
@@ -263,10 +313,10 @@ const Home = () => {
                     <a href={p.link} target="_blank" rel="noreferrer" className="bg-[#111] text-white px-6 py-2 rounded-full hover:scale-105 transition-transform">Launch ↗</a>
                     <a href={p.github} target="_blank" rel="noreferrer" className="border-2 border-[#111] px-6 py-2 rounded-full hover:bg-gray-100 transition-colors">Code ↗</a>
                   </div>
-                </div>
-              </FadeUp>
+                </HoverCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerSection>
 
           {/* See All / Show Less toggle */}
           {projects.length > 2 && (
