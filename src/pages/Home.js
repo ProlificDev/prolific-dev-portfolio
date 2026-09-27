@@ -87,8 +87,8 @@ const SpaceHero = () => (
   <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#e6e6e6] pt-10" id="home">
     
     {/* Dynamic SVG Blob Background */}
-    <div className="absolute top-[20%] left-[-10%] right-[-10%] bottom-[-20%] z-0 pointer-events-none">
-      <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMax slice" className="w-full h-full text-[#111] drop-shadow-[0_-20px_40px_rgba(0,0,0,0.15)]">
+    <div className="absolute top-[10%] md:top-[20%] left-[-20%] right-[-20%] md:left-[-10%] md:right-[-10%] bottom-[-20%] z-0 pointer-events-none">
+      <svg viewBox="0 0 1000 600" preserveAspectRatio="none" className="w-full h-full text-[#111] drop-shadow-[0_-20px_40px_rgba(0,0,0,0.15)]">
         <path fill="currentColor" d="M0,300 C150,150 250,400 450,200 C600,50 750,250 1000,150 L1000,800 L0,800 Z" />
         <path fill="currentColor" d="M0,600 C200,450 350,700 550,500 C700,350 850,550 1000,450 L1000,800 L0,800 Z" className="opacity-90" />
       </svg>
@@ -133,7 +133,7 @@ const SpaceHero = () => (
     </div>
 
     {/* Main Text Content inside the blob */}
-    <div className="relative z-20 text-center max-w-4xl mx-auto px-6 mt-16 md:mt-32">
+    <div className="relative z-20 text-center max-w-4xl mx-auto px-6 mt-32 md:mt-32">
       <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
         <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-6">
           Ifechukwu Awuzie:<br/>Full Stack Developer
