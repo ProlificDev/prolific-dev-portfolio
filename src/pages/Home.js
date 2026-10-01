@@ -105,33 +105,33 @@ const SpaceHero = () => (
 
     {/* Floating Retro Illustrations (Placeholders mapped to the image layout) */}
     {/* Alien (Left) */}
-    <div className="absolute left-[5%] top-[45%] w-20 h-32 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-[1.5]">
-      <span className="text-7xl">👽</span>
+    <div className="absolute left-[2%] top-[45%] w-10 h-20 md:w-20 md:h-32 animate-float z-10 flex items-center justify-center grayscale contrast-[1.5]">
+      <span className="text-4xl md:text-7xl">👽</span>
     </div>
     
     {/* Moon (Bottom Left) */}
-    <div className="absolute left-[15%] bottom-[10%] w-24 h-24 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '1s' }}>
-      <span className="text-[100px]">🌑</span>
+    <div className="absolute left-[8%] bottom-[10%] w-10 h-10 md:w-24 md:h-24 animate-float z-10 flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '1s' }}>
+      <span className="text-[40px] md:text-[100px]">🌑</span>
     </div>
     
     {/* UFO (Bottom Center) */}
-    <div className="absolute left-[40%] bottom-[5%] w-32 h-20 animate-float-slow z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '2s' }}>
-      <span className="text-[120px]">🛸</span>
+    <div className="absolute left-[40%] bottom-[2%] w-14 h-10 md:w-32 md:h-20 animate-float-slow z-10 flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '2s' }}>
+      <span className="text-[50px] md:text-[120px]">🛸</span>
     </div>
 
     {/* Telescope (Bottom Right) */}
-    <div className="absolute right-[25%] bottom-[5%] w-24 h-32 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '0.5s' }}>
-      <span className="text-7xl">🔭</span>
+    <div className="absolute right-[8%] bottom-[10%] w-10 h-14 md:w-24 md:h-32 animate-float z-10 flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '0.5s' }}>
+      <span className="text-4xl md:text-7xl">🔭</span>
     </div>
 
     {/* Astronaut (Right) */}
-    <div className="absolute right-[5%] top-[55%] w-40 h-40 animate-float-slow z-10 hidden md:flex items-center justify-center grayscale contrast-125">
-      <span className="text-[140px]">👨‍🚀</span>
+    <div className="absolute right-[2%] top-[55%] w-14 h-14 md:w-40 md:h-40 animate-float-slow z-10 flex items-center justify-center grayscale contrast-125">
+      <span className="text-[50px] md:text-[140px]">👨‍🚀</span>
     </div>
 
     {/* Saturn (Top Right) */}
-    <div className="absolute right-[15%] top-[25%] w-32 h-32 animate-float z-10 hidden md:flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '1.5s' }}>
-      <span className="text-[130px]">🪐</span>
+    <div className="absolute right-[8%] top-[25%] w-12 h-12 md:w-32 md:h-32 animate-float z-10 flex items-center justify-center grayscale contrast-125" style={{ animationDelay: '1.5s' }}>
+      <span className="text-[45px] md:text-[130px]">🪐</span>
     </div>
 
     {/* Main Text Content inside the blob */}
